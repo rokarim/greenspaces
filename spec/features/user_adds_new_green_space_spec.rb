@@ -13,7 +13,7 @@ feature 'Green Space New Form' do
     fill_in 'Description', with: "It is required you carry a shotgun at night."
     click_button "Add Green Space"
 
-    expect(current_path).to_not be new_green_space_path
+    expect(current_path).to_not eq new_green_space_path
     expect(page).to have_content "Boston Common"
     expect(page).to have_content "It is required you carry a shotgun at night."
   end
@@ -22,7 +22,7 @@ feature 'Green Space New Form' do
     visit new_green_space_path
     click_button "Add Green Space"
 
-    expect(current_path).to be new_green_space_path
+    expect(current_path).to eq green_spaces_path
     expect(page).to have_content "Name can\'t be blank"
   end
 end
