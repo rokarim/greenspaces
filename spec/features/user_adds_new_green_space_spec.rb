@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-# [] Green space index should at root path
-# [] Sees name of each green space
-# [] Name is link to show page
-
 feature 'Green Space New Form' do
   scenario 'user adds new green space successfully' do
     visit new_green_space_path
