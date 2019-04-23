@@ -5,6 +5,17 @@
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
+greenspaces
+
+a site that allows users to see ratings and features of green spaces. Additionally, users can submit new green spaces and add there own reviews.
+
+
+Drew Baker
+Michael Wellman
+Paige Kiefner
+Romina Karim
+
+
 Things you may want to cover:
 
 * Ruby version
