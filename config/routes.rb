@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  root 'homes#index'
+  root 'green_spaces#index'
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :green_spaces, only: [:index, :show]
 end
