@@ -1,6 +1,10 @@
 {
   "name": "greenspaces",
   "private": true,
+  "engines": {
+    "node": ">=6.0.0",
+    "yarn": ">=0.25.2"
+  },
   "dependencies": {
     "@rails/webpacker": "3.5",
     "babel-preset-react": "~6.24.1",
@@ -8,6 +12,7 @@
     "react": "~15.4.2",
     "react-dom": "~15.4.2",
     "redbox-react": "1.6.0"
+
   },
   "devDependencies": {
     "webpack-dev-server": "^2.11.1",
