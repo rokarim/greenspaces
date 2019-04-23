@@ -1,9 +1,5 @@
 require 'rails_helper'
 
-# [] Green space index should at root path
-# [] Sees name of each green space
-# [] Name is link to show page
-
 feature 'Green Space Index' do
   scenario 'user visits root path' do
     visit root_path
