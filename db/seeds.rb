@@ -1,10 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 20.times do
-  GreenSpace.create(name: Faker::Address.street_name + " Park", description: Faker::Hipster.paragraph)
+  arguments = { name: Faker::Address.street_name + " Park", description: Faker::Hipster.paragraph }
+  GreenSpace.create(arguments)
+end
+
+10.times do
+  first_name = Faker::Name.first_name
+  arguments = { first_name: first_name, last_name: Faker::Name.last_name, email: Faker::Internet.safe_email(first_name), password: Faker::Internet.password(8, 12) }
+  User.create(arguments)
+end
+
+User.all.each do |user|
+  10.times do
+    green_space = (GreenSpace.all - user.green_spaces).sample
+    arguments = { title: Faker::Marketing.buzzwords, rating: rand(1..5), body: Faker::Restaurant.review, green_space: green_space, user: user }
+    Review.create(arguments)
+  end
 end
