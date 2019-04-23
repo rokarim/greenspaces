@@ -9,4 +9,8 @@ FactoryBot.define do
     password_confirmation { 'password' }
   end
 
+  factory :green_space do
+    name { "Bark Park" }
+    description { "Lots of open space." }
+  end
 end
