@@ -6,13 +6,12 @@ import jasmineEnzyme from 'jasmine-enzyme'
 describe('GreenSpaceShowContainer', () => {
   let wrapper;
   let spaces;
-  let response;
   let params;
 
   beforeEach(() => {
     jasmineEnzyme();
     spaces = {green_space: {id: 1, name: "Statler Park", description: "I am a Park!"}}
-    params = spaces.id
+    params = spaces.green_space.id
     fetchMock.get(`/api/v1/green_spaces/${params}`, {
       status: 200,
       body: spaces
