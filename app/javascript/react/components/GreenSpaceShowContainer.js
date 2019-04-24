@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-
+import ReviewTile from './ReviewTile'
 
 class GreenSpaceShowContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      space: {}
+      space: {},
+      reviews:[]
     }
   }
 
@@ -22,16 +23,34 @@ class GreenSpaceShowContainer extends Component {
         })
         .then(response => response.json())
         .then(body => {
-          this.setState({ space: body.green_space})
+          this.setState({
+            space: body.greenspace.green_space,
+            reviews: body.reviews
+          })
         })
         .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   render() {
+
+    let reviews = this.state.reviews.map(review => {
+      return(
+        <ReviewTile
+          key={review.id}
+          id={review.id}
+          title={review.title}
+          rating={review.rating}
+          body={review.body}
+          created_at={review.created_at}
+        />
+      )
+    })
+
     return(
       <div>
         <h1>{this.state.space.name}</h1>
         <p>{this.state.space.description}</p>
+        {reviews}
       </div>
     )
   }
