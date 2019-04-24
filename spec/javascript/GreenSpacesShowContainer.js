@@ -1,10 +1,11 @@
 import fetchMock from 'fetch-mock'
 import GreenSpaceShowContainer from '../../app/javascript/react/components/GreenSpaceShowContainer';
 import jasmineEnzyme from 'jasmine-enzyme'
+import { mount } from 'enzyme'
 
 describe('GreenSpaceShowContainer', () => {
   let wrapper;
-  let spaces;
+  let response;
   let params;
 
   beforeEach(() => {
