@@ -6,7 +6,7 @@ const App = props => {
   return(
 
   <Router history={browserHistory}>
-    <Route path='/green_spaces/:id' component={GreenSpaceShowContainer} />
+    <Route path='/greenspaces/:id' component={GreenSpaceShowContainer} />
   </Router>
   )
 }

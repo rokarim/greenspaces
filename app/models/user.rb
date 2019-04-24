@@ -9,4 +9,8 @@ class User < ApplicationRecord
 
   has_many :reviews
   has_many :green_spaces, through: :reviews
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end
