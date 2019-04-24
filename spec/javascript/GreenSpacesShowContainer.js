@@ -5,7 +5,6 @@ import jasmineEnzyme from 'jasmine-enzyme'
 describe('GreenSpaceShowContainer', () => {
   let wrapper;
   let spaces;
-  let response;
   let params;
 
   beforeEach(() => {
