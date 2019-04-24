@@ -2,5 +2,10 @@
 <% @green_spaces.each do |space| %>
   <div class="column panel callout small-9 small-centered">
     <p><%= link_to space.name, green_space_path(space) %></p>
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <p> <%= %> </p>
+      <% end %>
+    <% end %>
   </div>
 <% end %>

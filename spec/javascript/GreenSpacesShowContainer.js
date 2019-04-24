@@ -29,4 +29,8 @@ describe('GreenSpaceShowContainer', () => {
         done();
       }, 0);
     });
+
+  it ('should show a delete button for admin users', () => {
+
+  })
 });

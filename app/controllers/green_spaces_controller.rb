@@ -1,4 +1,6 @@
 class GreenSpacesController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user, except: [:index, :show]
 
   def index
     @green_spaces = GreenSpace.all
@@ -23,10 +25,22 @@ class GreenSpacesController < ApplicationController
     end
   end
 
+  def destroy
+    @green_space = GreenSpace.find(params[:id])
+    @green_space.destroy
+  end
+
   private
 
   def new_green_space_params
     params.require(:green_space).permit(:name, :description)
+  end
+
+  def authorize_user
+    if !current_user.admin?
+      flash[:notice] = "You do not have access to this page."
+      redirect_to root_path
+    end
   end
 
 end
