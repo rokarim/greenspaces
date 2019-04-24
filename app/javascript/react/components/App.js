@@ -1,10 +1,14 @@
-import React from 'react'
-// import { Route, Router, browserHistory } from 'react-router'
+import React from 'react';
+import { Router, browserHistory, Route, IndexRoute } from 'react-router';
+import GreenSpaceShowContainer from './GreenSpaceShowContainer'
 
-export const App = (props) => {
+const App = props => {
+  return(
 
-
-
+  <Router history={browserHistory}>
+    <Route path='/green_spaces/:id' component={GreenSpaceShowContainer} />
+  </Router>
+  )
 }
 
 export default App

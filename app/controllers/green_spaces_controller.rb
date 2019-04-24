@@ -5,7 +5,8 @@ class GreenSpacesController < ApplicationController
   end
 
   def show
-      @green_space = GreenSpace.find(params[:id])
+    @green_space = GreenSpace.find(params[:id])
+
   end
 
 end

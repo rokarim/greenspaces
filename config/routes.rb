@@ -3,4 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :green_spaces, only: [:index, :show]
+
+  namespace :api do
+    namespace :v1 do
+      resources :green_spaces, only: [:show]
+    end
+  end
 end
