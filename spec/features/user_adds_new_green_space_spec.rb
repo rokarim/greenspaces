@@ -9,9 +9,8 @@ feature 'Green Space New Form' do
     fill_in 'Description', with: "It is required you carry a shotgun at night."
     click_button "Add Green Space"
 
-    expect(current_path).to_not eq new_green_space_path
-    expect(page).to have_content "Boston Common"
-    expect(page).to have_content "It is required you carry a shotgun at night."
+    expect(current_path).to eq green_space_path(GreenSpace.find_by(name: "Boston Common"))
+    expect(page).to have_content "Green Space added successfully"
   end
 
   scenario 'user does not specify a name' do
