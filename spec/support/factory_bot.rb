@@ -21,4 +21,13 @@ FactoryBot.define do
     user
     green_space
   end
+
+  factory :feature do
+    name {"Thanksgiving Nuts"}
+  end
+
+  factory :categorization do
+    green_space
+    feature
+  end
 end
