@@ -1,0 +1,20 @@
+body {
+  background-color: #b4debe
+}
+
+.top-bar {
+  background-color: #4a403d
+}
+
+.panel.callout {
+  background-color: #facf7d
+}
+
+h1 {
+  font-family: 'Artifika', serif;
+  text-align: center;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}

@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2019_04_25_182407) do
   enable_extension "plpgsql"
 
   create_table "categorizations", force: :cascade do |t|
-    t.bigint "green_space_id"
-    t.bigint "feature_id"
+    t.bigint "green_space_id", null: false
+    t.bigint "feature_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["feature_id"], name: "index_categorizations_on_feature_id"
