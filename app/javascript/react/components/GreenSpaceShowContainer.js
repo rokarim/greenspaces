@@ -6,15 +6,15 @@ class GreenSpaceShowContainer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      space: {},
-      reviews:[]
+      space: {
+        reviews: []
+      },
     }
     this.deleteElement = this.deleteElement.bind(this)
   }
 
   componentDidMount(){
-    fetch(`/api/v1/greenspaces/${this.props.params.id}`,
-      {credentials: 'same-origin'})
+    fetch(`/api/v1/greenspaces/${this.props.params.id}`)
       .then(response => {
         if (response.ok) {
           return response;
@@ -27,8 +27,7 @@ class GreenSpaceShowContainer extends Component {
         .then(response => response.json())
         .then(body => {
           this.setState({
-            space: body.greenspace.green_space,
-            reviews: body.reviews
+            space: body.green_space
           })
         })
         .catch(error => console.error(`Error in fetch: ${error.message}`));
@@ -50,7 +49,7 @@ class GreenSpaceShowContainer extends Component {
       visibility = "visible"
     }
 
-    let reviews = this.state.reviews.map(review => {
+    let reviews = this.state.space.reviews.map(review => {
       return(
         <ReviewTile
           key={review.id}
