@@ -18,7 +18,7 @@ FactoryBot.define do
     title { "Great stuff" }
     rating { 4 }
     body { "For dessert, we ordered the chocolate drizzled churros and they were delicious too! They even came with some fresh fruit." }
-    user_id { User.find_by(first_name: "Betty") }
-    green_space_id { GreenSpace.find_by(name: "Bark Park") }
+    user
+    green_space
   end
 end

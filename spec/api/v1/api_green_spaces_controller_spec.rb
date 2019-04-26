@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe Api::V1::GreenSpacesController, type: :controller do
-  user = FactoryBot.create(:user)
-  space = FactoryBot.create(:green_space)
-  FactoryBot.create(:review, user: user, green_space: space)
-
   describe "GET#show" do
+    let!(:user) { FactoryBot.create(:user) }
+    let!(:space) { FactoryBot.create(:green_space) }
+
     it "should return a show page for a specific Green Space with reviews" do
+      FactoryBot.create(:review, user: user, green_space: space)
       get :show, params: {id: space.id}
       returned_json = JSON.parse(response.body)
 
