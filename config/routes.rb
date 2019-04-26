@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :green_spaces, path: "greenspaces", only: [:show]
+      resources :green_spaces, path: "greenspaces", only: [:show, :destroy]
     end
   end
 end
