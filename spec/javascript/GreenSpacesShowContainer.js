@@ -11,32 +11,33 @@ describe('GreenSpaceShowContainer', () => {
   beforeEach(() => {
     jasmineEnzyme();
     response = {
-      greenspace: {
-        green_space:
-        { id: 1, name: "Statler Park", description: "I am a Park!"}
-      },
-      reviews:  [
-        {
-          id: 14,
-          title: "immersive experience",
-          body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
-          rating: 4,
-          user_id: 3,
-          created_at: "2019-04-24T13:54:45.906Z"
-        },
-        {
-          id: 30,
-          title: "buying cycle",
-          body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
-          rating: 4,
-          user_id: 4,
-          created_at: "2019-04-24T13:54:46.015Z"
+      green_space:
+        { id: 1,
+          name: "Statler Park",
+          description: "I am a Park!",
+          reviews:  [
+            {
+              id: 14,
+              title: "immersive experience",
+              body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
+              rating: 4,
+              user_info: "Marcel Nienow",
+              created_at: "2019-04-24T13:54:45.906Z"
+            },
+            {
+              id: 30,
+              title: "buying cycle",
+              body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
+              rating: 4,
+              user_info: "Sally Smith",
+              created_at: "2019-04-24T13:54:46.015Z"
+            }
+          ]
         }
-      ]
-    }
+      }
 
-    params = response.greenspace.green_space.id
-    fetchMock.get(`/api/v1/green_spaces/${params}`, {
+    params = response.green_space.id
+    fetchMock.get(`/api/v1/greenspaces/${params}`, {
       status: 200,
       body: response
     });

@@ -1,11 +1,21 @@
 class GreenSpaceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :is_admin
+  attributes :id, :name, :description, :reviews, :is_admin, :user_id
+
+  has_many :reviews
+
+  def user_id
+    if current_user.nil?
+      ""
+    else
+      current_user[:id]
+    end
+  end
 
   def is_admin
-    if @current_user.nil?
+    if current_user.nil?
       false
     else
-      @current_user[:admin]
+      current_user[:admin]
     end
   end
 end
