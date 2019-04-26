@@ -16,3 +16,13 @@ User.all.each do |user|
     Review.create(arguments)
   end
 end
+
+10.times do
+  Feature.create(name: Faker::Coffee.blend_name)
+end
+
+40.times do
+  g = GreenSpace.all.sample
+  f = (Feature.all - g.features).sample
+  Categorization.create(green_space: g, feature: f)
+end
