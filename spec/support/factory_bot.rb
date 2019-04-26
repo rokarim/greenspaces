@@ -12,6 +12,11 @@ FactoryBot.define do
   factory :green_space do
     name { "Bark Park" }
     description { "Lots of open space." }
+    neighborhood
+  end
+
+  factory :neighborhood do
+    name { "South Boston" }
   end
 
   factory :review do

@@ -12,14 +12,17 @@ class GreenSpacesController < ApplicationController
 
   def new
     @green_space = GreenSpace.new
+    @neighborhoods = Neighborhood.all.map { |neighborhood| [neighborhood.name, neighborhood.id] }
   end
 
   def create
     @green_space = GreenSpace.new(new_green_space_params)
+    @green_space.neighborhood = Neighborhood.find(params[:green_space][:neighborhood])
     if @green_space.save
       flash[:notice] = "Green Space added successfully"
       redirect_to green_space_path(@green_space)
     else
+      @neighborhoods = Neighborhood.all.map { |neighborhood| [neighborhood.name, neighborhood.id] }
       flash.now[:alert] = @green_space.errors.full_messages.join(', ')
       render :new
     end
@@ -42,5 +45,4 @@ class GreenSpacesController < ApplicationController
       redirect_to root_path
     end
   end
-
 end
