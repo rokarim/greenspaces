@@ -1,6 +1,15 @@
 require 'rails_helper'
 
 feature 'Green Space New Form' do
+  before :each do
+    user1 = FactoryBot.create(:user, email: 'user1@example.com', admin: true)
+    user2 = FactoryBot.create(:user, email: 'user2@example.com', admin: false)
+    visit new_user_session_path
+    fill_in 'Email', with:'user1@example.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Log in'
+  end
+
   scenario 'user adds new green space successfully' do
     visit new_green_space_path
     expect(page).to have_content "New Green Space Form"

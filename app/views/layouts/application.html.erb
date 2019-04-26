@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Artifika%7COpen+Sans" rel="stylesheet">
+
   <title>Greenspaces</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application', media: 'all' %>
@@ -19,6 +21,15 @@
     </ul>
 
     <section class="top-bar-section">
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <ul class="left">
+          <li class="name">
+            <%= link_to 'New GreenSpace', new_green_space_path %>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
       <ul class="right">
         <%- if current_user -%>
           <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
