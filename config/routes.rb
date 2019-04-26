@@ -11,4 +11,5 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :features, only: [:index, :show]
 end
