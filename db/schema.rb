@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_23_201341) do
+ActiveRecord::Schema.define(version: 2019_04_25_182407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categorizations", force: :cascade do |t|
+    t.bigint "green_space_id", null: false
+    t.bigint "feature_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_id"], name: "index_categorizations_on_feature_id"
+    t.index ["green_space_id"], name: "index_categorizations_on_green_space_id"
+  end
+
+  create_table "features", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "green_spaces", force: :cascade do |t|
     t.string "name", null: false

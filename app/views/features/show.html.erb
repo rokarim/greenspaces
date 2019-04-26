@@ -1,0 +1,6 @@
+<h1 class="text-center"><%= @feature.name %></h1>
+<% @green_spaces.each do |space| %>
+  <div class="column panel callout small-9 small-centered">
+    <p><%= link_to space.name, green_space_path(space) %></p>
+  </div>
+<% end %>
