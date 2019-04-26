@@ -19,5 +19,17 @@ RSpec.describe Api::V1::GreenSpacesController, type: :controller do
       expect(returned_json["green_space"]["reviews"].length).to eq 1
       expect(returned_json["green_space"]["reviews"][0]["title"]).to eq space.reviews[0].title
     end
+
+  describe "DELETE" do
+    it "should delete the selected greenspace" do
+      space1 = FactoryBot.create(:green_space)
+      space2 = FactoryBot.create(:green_space)
+      space3 = FactoryBot.create(:green_space)
+
+      delete :destroy, params: {id: space1.id}
+
+      expect(GreenSpace.all).not_to include space1
+    end
+  end
   end
 end

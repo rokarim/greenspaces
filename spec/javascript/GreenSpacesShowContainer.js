@@ -32,7 +32,9 @@ describe('GreenSpaceShowContainer', () => {
               user_info: "Sally Smith",
               created_at: "2019-04-24T13:54:46.015Z"
             }
-          ]
+          ],
+          id_admin: true,
+          user_id: 1
         }
       }
 
@@ -41,10 +43,20 @@ describe('GreenSpaceShowContainer', () => {
       status: 200,
       body: response
     });
+
+    fetchMock.post(`/api/v1/greenspaces/${params}/reviews`, {
+      body: JSON.stringify({title: 'This is a new review',
+                            rating: '3',
+                            body: 'This is the body for the new review and should be larger than 40 characters.',
+                            user_id: 1,
+                            green_space_id: 1 })
+    });
+
     wrapper = mount(
       <GreenSpaceShowContainer  params= { {id: params} } />
     )
   })
+
   afterEach(fetchMock.restore)
 
   it('should render react component with the information of the park', (done) => {
@@ -63,5 +75,37 @@ describe('GreenSpaceShowContainer', () => {
       expect(wrapper.text()).toContain("4/24/2019")
       done()
     }, 0);
+  });
+
+  it('should show the new review form after clicking New Review', (done) => {
+    setTimeout(() => {
+      wrapper.find('#newReviewButton').simulate('click')
+      expect(wrapper.text()).toContain("New Review")
+      expect(wrapper.text()).toContain("Title")
+      expect(wrapper.text()).toContain("Rating")
+      expect(wrapper.text()).toContain("Body")
+      done()
+    }, 0);
+  });
+
+  it('should be able to add a new review for a green space', (done) => {
+    setTimeout(() => {
+      wrapper.find('#newReviewButton').simulate('click')
+      setTimeout(() => {
+        wrapper.find('#title').simulate('change', { target: { value: 'This is a new review' } })
+        wrapper.find('#rating').simulate('change', { target: { value: '3' } })
+        wrapper.find('#body').simulate('change', { target: { value: 'This is the body for the new review and should be larger than 40 characters.' } })
+
+        wrapper.find('form').simulate('submit')
+
+        setTimeout(() => {
+          expect(wrapper.text()).toContain("Statler Park")
+          expect(wrapper.text()).toContain("immersive experience")
+          expect(wrapper.text()).toContain("buying cycle")
+          expect(wrapper.text()).toContain("This is a new review")
+        });
+      });
+    done()
+  }, 0);
   });
 });
