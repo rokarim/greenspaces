@@ -53,13 +53,15 @@ class GreenSpaceShowContainer extends Component {
         error = new Error(errorMessage);
         throw(error);
       }
-      })
+    })
     .then(response => response.json())
     .then(body => {
-      let newState = this.state.space
-      newState.reviews = newState.reviews.concat(body.review)
-      this.setState({ space: newState,
-                      showForm: false })
+      let currentState = this.state.space
+      currentState.reviews = currentState.reviews.concat(body.review)
+      this.setState({
+        space: currentState,
+        showForm: false
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }

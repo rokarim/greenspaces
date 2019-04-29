@@ -21,7 +21,7 @@ describe('GreenSpaceShowContainer', () => {
               title: "immersive experience",
               body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
               rating: 4,
-              user_info: "Marcel Nienow",
+              user_info: { name: "Marcel Nienow", user_id: 2 },
               created_at: "2019-04-24T13:54:45.906Z"
             },
             {
@@ -29,11 +29,11 @@ describe('GreenSpaceShowContainer', () => {
               title: "buying cycle",
               body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
               rating: 4,
-              user_info: "Sally Smith",
+              user_info: { name: "Sally Smith", user_id: 4 },
               created_at: "2019-04-24T13:54:46.015Z"
             }
           ],
-          id_admin: true,
+          is_admin: true,
           user_id: 1
         }
       }
@@ -69,6 +69,8 @@ describe('GreenSpaceShowContainer', () => {
 
   it('should render two review components', (done) => {
     setTimeout(() => {
+      console.log(wrapper.debug())
+
       expect(wrapper.text()).toContain("immersive experience")
       expect(wrapper.text()).toContain("Staff was very accommodating but the chef were no nonsense")
       expect(wrapper.text()).toContain("Stars: 4")
@@ -105,7 +107,17 @@ describe('GreenSpaceShowContainer', () => {
           expect(wrapper.text()).toContain("This is a new review")
         });
       });
-    done()
-  }, 0);
+      done()
+    }, 0);
   });
+
+  it('should enable admin to delete reviews', (done) => {
+    setTimeout(() => {
+      wrapper.find('#deleteReviewButton')[1].simulate('click')
+      setTimeout(() => {
+        expect(wrapper.text()).not.toContain("This is a new review")
+      })
+      done()
+    }, 0)
+  })
 });
