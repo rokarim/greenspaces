@@ -69,8 +69,6 @@ describe('GreenSpaceShowContainer', () => {
 
   it('should render two review components', (done) => {
     setTimeout(() => {
-      console.log(wrapper.debug())
-
       expect(wrapper.text()).toContain("immersive experience")
       expect(wrapper.text()).toContain("Staff was very accommodating but the chef were no nonsense")
       expect(wrapper.text()).toContain("Stars: 4")
@@ -110,14 +108,4 @@ describe('GreenSpaceShowContainer', () => {
       done()
     }, 0);
   });
-
-  it('should enable admin to delete reviews', (done) => {
-    setTimeout(() => {
-      wrapper.find('#deleteReviewButton')[1].simulate('click')
-      setTimeout(() => {
-        expect(wrapper.text()).not.toContain("This is a new review")
-      })
-      done()
-    }, 0)
-  })
 });
