@@ -22,19 +22,19 @@ class GreenSpaceShowContainer extends Component {
     fetch(`/api/v1/greenspaces/${this.props.params.id}`,
       { credentials: 'same-origin' })
     .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status}(${response.statusText})` ,
-          error = new Error(errorMessage);
-          throw(error);
-        }
-        })
-        .then(response => response.json())
-        .then(body => {
-          this.setState({ space: body.green_space })
-        })
-        .catch(error => console.error(`Error in fetch: ${error.message}`));
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status}(${response.statusText})` ,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({ space: body.green_space })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   addReview(formPayload){

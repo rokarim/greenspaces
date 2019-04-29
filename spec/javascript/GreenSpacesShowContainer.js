@@ -45,11 +45,12 @@ describe('GreenSpaceShowContainer', () => {
     });
 
     fetchMock.post(`/api/v1/greenspaces/${params}/reviews`, {
-      body: JSON.stringify({title: 'This is a new review',
-                            rating: '3',
-                            body: 'This is the body for the new review and should be larger than 40 characters.',
-                            user_id: 1,
-                            green_space_id: 1 })
+      body: JSON.stringify({
+        title: 'This is a new review',
+        rating: '3',
+        body: 'This is the body for the new review and should be larger than 40 characters.',
+        user_id: 1,
+        green_space_id: 1 })
     });
 
     wrapper = mount(
