@@ -4,4 +4,5 @@ button.visible {
 
 button.hidden {
   visibility: hidden;
+  display: none;
 }

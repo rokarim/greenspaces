@@ -4,5 +4,5 @@ class Categorization < ApplicationRecord
 
   validates :feature_id, presence: true
   validates :green_space_id, presence: true
-
+  validates :feature_id, uniqueness: { scope: [:green_space_id]}
 end

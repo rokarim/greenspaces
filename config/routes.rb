@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :green_spaces, path: "greenspaces", only: [:show, :destroy] do
         resources :reviews, only: [:create]
       end
+      resources :reviews, only: [:destroy]
     end
   end
   resources :features, only: [:index, :show]

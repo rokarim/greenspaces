@@ -14,28 +14,27 @@ class GreenSpaceShowContainer extends Component {
     }
     this.addReview = this.addReview.bind(this)
     this.deleteElement = this.deleteElement.bind(this)
+    this.deleteReview = this.deleteReview.bind(this)
     this.handleFormVisibility = this.handleFormVisibility.bind(this)
   }
 
   componentDidMount(){
     fetch(`/api/v1/greenspaces/${this.props.params.id}`,
-      {credentials: 'same-origin'})
+      { credentials: 'same-origin' })
     .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status}(${response.statusText})` ,
-          error = new Error(errorMessage);
-          throw(error);
-        }
-        })
-        .then(response => response.json())
-        .then(body => {
-          this.setState({
-            space: body.green_space
-          })
-        })
-        .catch(error => console.error(`Error in fetch: ${error.message}`));
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status}(${response.statusText})` ,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      this.setState({ space: body.green_space })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   addReview(formPayload){
@@ -43,6 +42,7 @@ class GreenSpaceShowContainer extends Component {
     fetch(`/api/v1/greenspaces/${this.state.space.id}/reviews`, {
       method: 'POST',
       credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formPayload)
     })
     .then(response => {
@@ -53,13 +53,15 @@ class GreenSpaceShowContainer extends Component {
         error = new Error(errorMessage);
         throw(error);
       }
-      })
+    })
     .then(response => response.json())
     .then(body => {
       let currentState = this.state.space
       currentState.reviews = currentState.reviews.concat(body.review)
-      this.setState({ space: currentState,
-                      showForm: false })
+      this.setState({
+        space: currentState,
+        showForm: false
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -74,15 +76,31 @@ class GreenSpaceShowContainer extends Component {
     }
   }
 
+  deleteReview(review){
+    if (confirm('Are you sure you want to delete this review?')){
+      fetch(`/api/v1/reviews/${review.id}`, {
+        method: 'DELETE',
+        credentials: 'same-origin'
+      })
+      .then((result) => {
+        let updatedSpace = this.state.space
+        updatedSpace.reviews.splice(updatedSpace.reviews.indexOf(review), 1)
+        this.setState({ space: updatedSpace })
+      })
+    }
+  }
+
   handleFormVisibility(){
-    this.setState({showForm: true})
+    this.setState({showForm: !this.state.showForm})
   }
 
   render() {
     let deleteButton = "hidden"
-    if(this.state.space.is_admin === true) {
+    if (this.state.space.is_admin === true) {
       deleteButton = "visible"
     }
+
+    let reviewDeleteButton = deleteButton
 
     let handleClick = () => {
       this.handleFormVisibility()
@@ -90,13 +108,24 @@ class GreenSpaceShowContainer extends Component {
 
     let form = ""
     let newButton = "visible"
+    let buttonText = "New Review"
 
-    if (this.state.showForm === true){
-      form = <FormContainer addReview={this.addReview}/>
+    if (this.state.space.user_id === "") {
       newButton = "hidden"
     }
 
+    if (this.state.showForm === true){
+      form = <FormContainer addReview={this.addReview}/>
+      buttonText = "Hide Form"
+    }
+
     let reviews = this.state.space.reviews.map(review => {
+      if(this.state.space.user_id === review.user_info.user_id) {
+        reviewDeleteButton = "visible"
+      }
+      let handleDelete = () => {
+        this.deleteReview(review)
+      }
       return(
         <ReviewTile
           key={review.id}
@@ -106,7 +135,9 @@ class GreenSpaceShowContainer extends Component {
           title={review.title}
           rating={review.rating}
           body={review.body}
-          created_at={review.created_at}
+          createdAt={review.created_at}
+          deleteButtonShow={reviewDeleteButton}
+          deleteReview={handleDelete}
         />
       )
     })
@@ -117,7 +148,7 @@ class GreenSpaceShowContainer extends Component {
         <p>{this.state.space.description}</p>
         <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
         {form}
-        <button id='newReviewButton' className={newButton} onClick={handleClick}>New Review</button>
+        <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
         {reviews}
       </div>
     )
