@@ -11,8 +11,9 @@ const ReviewTile = (props) => {
   return(
     <div className="column panel callout small-9 small-centered">
       <h3>{props.title}</h3>
-      <p>Stars: {props.rating} - {date(props.created_at)}</p>
+      <p>Stars: {props.rating} - {date(props.createdAt)}</p>
       <p>{props.body}</p>
+      <button id='deleteButton' className={props.deleteButtonShow} onClick={props.deleteReview}>Delete</button>
     </div>
   )
 }
