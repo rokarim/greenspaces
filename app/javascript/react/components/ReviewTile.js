@@ -8,11 +8,17 @@ const ReviewTile = (props) => {
     let day = date.getDate();
     return`${month}/${day}/${year}`
   }
+
   return(
-    <div className="column panel callout small-9 small-centered">
+    <div className="row column  panel callout small-9 small-centered">
+      <div className="column small-1 ">
+      <img className="profile-photo-small" src={props.profile_photo} />
+      </div>
+      <div className="column small-8 ">
       <h3>{props.title}</h3>
       <p>Stars: {props.rating} - {date(props.created_at)}</p>
       <p>{props.body}</p>
+      </div>
     </div>
   )
 }
