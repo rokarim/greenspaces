@@ -21,7 +21,7 @@ describe('GreenSpaceShowContainer', () => {
               title: "immersive experience",
               body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
               rating: 4,
-              user_info: "Marcel Nienow",
+              user_info: { name: "Marcel Nienow", user_id: 2 },
               created_at: "2019-04-24T13:54:45.906Z"
             },
             {
@@ -29,11 +29,11 @@ describe('GreenSpaceShowContainer', () => {
               title: "buying cycle",
               body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
               rating: 4,
-              user_info: "Sally Smith",
+              user_info: { name: "Sally Smith", user_id: 4 },
               created_at: "2019-04-24T13:54:46.015Z"
             }
           ],
-          id_admin: true,
+          is_admin: true,
           user_id: 1
         }
       }
@@ -45,11 +45,12 @@ describe('GreenSpaceShowContainer', () => {
     });
 
     fetchMock.post(`/api/v1/greenspaces/${params}/reviews`, {
-      body: JSON.stringify({title: 'This is a new review',
-                            rating: '3',
-                            body: 'This is the body for the new review and should be larger than 40 characters.',
-                            user_id: 1,
-                            green_space_id: 1 })
+      body: JSON.stringify({
+        title: 'This is a new review',
+        rating: '3',
+        body: 'This is the body for the new review and should be larger than 40 characters.',
+        user_id: 1,
+        green_space_id: 1 })
     });
 
     wrapper = mount(
@@ -105,7 +106,7 @@ describe('GreenSpaceShowContainer', () => {
           expect(wrapper.text()).toContain("This is a new review")
         });
       });
-    done()
-  }, 0);
+      done()
+    }, 0);
   });
 });
