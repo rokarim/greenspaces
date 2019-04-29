@@ -45,23 +45,23 @@ class GreenSpaceShowContainer extends Component {
       credentials: 'same-origin',
       body: JSON.stringify(formPayload)
     })
-      .then(response => {
-        if (response.ok) {
-          return response;
-        } else {
-          let errorMessage = `${response.status}(${response.statusText})` ,
-          error = new Error(errorMessage);
-          throw(error);
-        }
-        })
-        .then(response => response.json())
-        .then(body => {
-          let currentState = this.state.space
-          currentState.reviews = currentState.reviews.concat(body.review)
-          this.setState({ space: currentState,
-                          showForm: false })
-        })
-        .catch(error => console.error(`Error in fetch: ${error.message}`));
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status}(${response.statusText})` ,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+      })
+    .then(response => response.json())
+    .then(body => {
+      let currentState = this.state.space
+      currentState.reviews = currentState.reviews.concat(body.review)
+      this.setState({ space: currentState,
+                      showForm: false })
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
   deleteElement(){
@@ -113,9 +113,9 @@ class GreenSpaceShowContainer extends Component {
       <div>
         <h1>{this.state.space.name}</h1>
         <p>{this.state.space.description}</p>
-        <button className={deleteButton} onClick={this.deleteElement}>Delete</button>
+        <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
         {form}
-        <button className={newButton} onClick={handleClick}>New Review</button>
+        <button id='newReviewButton' className={newButton} onClick={handleClick}>New Review</button>
         {reviews}
       </div>
     )

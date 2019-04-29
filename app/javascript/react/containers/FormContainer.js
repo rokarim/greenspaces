@@ -28,9 +28,6 @@ class FormContainer extends React.Component {
       body: this.state.body
     }
     this.props.addReview(formPayload)
-    // this.setState({title: '',
-    //               rating: '',
-    //               body: ''})
     }
 
   render() {
