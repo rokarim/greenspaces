@@ -1,7 +1,15 @@
 require 'rails_helper'
 
-feature 'Green Space New Form' do
-  scenario 'user adds new green space successfully' do
+feature 'Green Space New Form for Admin' do
+  before :each do
+    user = FactoryBot.create(:user, email: 'user1@example.com', admin: true)
+    visit new_user_session_path
+    fill_in 'Email', with:'user1@example.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Log in'
+  end
+
+  scenario 'admin adds new green space successfully' do
     visit new_green_space_path
     expect(page).to have_content "New Green Space Form"
 
@@ -19,5 +27,20 @@ feature 'Green Space New Form' do
 
     expect(current_path).to eq green_spaces_path
     expect(page).to have_content "Name can\'t be blank"
+  end
+end
+
+feature 'Green Space New Form for Not Admin' do
+  before :each do
+    user = FactoryBot.create(:user, email: 'user2@example.com', admin: false)
+    visit new_user_session_path
+    fill_in 'Email', with:'user2@example.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Log in'
+  end
+
+  scenario 'not admin user is unable to access the new green space page' do
+    visit new_green_space_path
+    expect(page).to have_content "You do not have access to this page."
   end
 end
