@@ -22,10 +22,7 @@ RSpec.describe Api::V1::GreenSpacesController, type: :controller do
 
   describe "DELETE" do
     it "should delete the selected greenspace" do
-      space1 = FactoryBot.create(:green_space)
-      space2 = FactoryBot.create(:green_space)
-      space3 = FactoryBot.create(:green_space)
-
+      space1 = FactoryBot.create(:green_space, neighborhood: Neighborhood.new(name: "Allston"))
       delete :destroy, params: {id: space1.id}
 
       expect(GreenSpace.all).not_to include space1
