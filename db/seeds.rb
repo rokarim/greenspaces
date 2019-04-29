@@ -1,3 +1,11 @@
+require 'open-uri'
+
+GreenSpace.delete_all
+Review.delete_all
+Feature.delete_all
+Categorization.delete_all
+Neighborhood.delete_all
+
 20.times do
   arguments = { name: Faker::Address.street_name + " Park", description: Faker::Hipster.paragraph }
   GreenSpace.create(arguments)
