@@ -115,9 +115,9 @@ class GreenSpaceShowContainer extends Component {
       <div>
         <h1>{this.state.space.name}</h1>
         <p>{this.state.space.description}</p>
-        <button className={deleteButton} onClick={this.deleteElement}>Delete</button>
+        <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
         {form}
-        <button className={newButton} onClick={handleClick}>New Review</button>
+        <button id='newReviewButton' className={newButton} onClick={handleClick}>New Review</button>
         {reviews}
       </div>
     )
