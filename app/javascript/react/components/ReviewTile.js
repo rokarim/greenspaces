@@ -6,12 +6,33 @@ class ReviewTile extends Component {
   constructor(props){
     super(props)
     this.state = {
-      thumbs: 0
+      thumbs: 0,
+      voteCount: 0
     }
     this.handleThumbsUp = this.handleThumbsUp.bind(this)
     this.handleThumbsDown = this.handleThumbsDown.bind(this)
   }
 
+  componentDidMount(){
+    fetch(`/api/v1/users/${this.props.currentUser}/reviews/${this.props.id}`,
+      { credentials: 'same-origin' })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status}(${response.statusText})` ,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      if(body !== null) {
+        this.setState({ thumbs: body.vote, voteCount: body.vote_count })
+      }
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
 
   handleThumbsUp() {
     if (this.state.thumbs === 1) {
@@ -31,7 +52,7 @@ class ReviewTile extends Component {
 
 
   render() {
-    let profile_photo = this.props.profile_photo
+    let profilePhoto = this.props.profilePhoto
     let rating = this.props.rating
     let title = this.props.title
     let createdAt = this.props.createdAt
@@ -57,7 +78,7 @@ class ReviewTile extends Component {
     return(
       <div className="row column panel callout small-9 small-centered">
         <div className="column small-1 ">
-          <img className="profile-photo-small" src={profile_photo} />
+          <img className="profile-photo-small" src={profilePhoto} />
         </div>
         <div className="column small-8 ">
           <h3>{title}</h3>
@@ -69,7 +90,7 @@ class ReviewTile extends Component {
           <span className={thumbsDownClass}>
           <i className="fa fa-thumbs-down" aria-hidden="true" onClick={this.handleThumbsDown}></i>
           </span>
-          <p>{this.state.thumbs}</p>
+          <p>{this.state.voteCount}</p>
           <button id='deleteReviewButton' className={deleteButtonShow} onClick={deleteReview}>Delete Review</button>
         </div>
       </div>

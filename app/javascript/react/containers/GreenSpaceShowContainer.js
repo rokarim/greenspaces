@@ -130,8 +130,9 @@ class GreenSpaceShowContainer extends Component {
         <ReviewTile
           key={review.id}
           id={review.id}
-          user_id ={review.user_info.user_id}
-          profile_photo={review.user_info.profile_photo.url}
+          currentUser={this.state.space.user_id}
+          userId={review.user_info.user_id}
+          profilePhoto={review.user_info.profile_photo.url}
           title={review.title}
           rating={review.rating}
           body={review.body}
