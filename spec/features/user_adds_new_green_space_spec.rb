@@ -13,7 +13,8 @@ feature 'Green Space New Form' do
     fill_in 'Description', with: "It is required you carry a shotgun at night."
     fill_in 'Address', with: "Boston MA"
     fill_in 'Acres', with: "5"
-    fill_in 'Coordinates', with: "{ lat: 42.3566423, lng: -71.0557196 }"
+    fill_in 'Latitude', with: "42.3566423"
+    fill_in 'Longitude', with: "-71.0557196"
     select 'Bay Village', from: 'Neighborhood'
     click_button "Add Green Space"
 

@@ -24,7 +24,6 @@ parsed['features'].each do |result|
   end
   average_lng = average_lng / bounding_array.length
   average_lat = average_lat / bounding_array.length
-  coordinates = { lat: average_lat, lng: average_lng }
   Feature.create({ name: attributes['TypeLong'] })
   feature = Feature.find_by(name: attributes['TypeLong'])
   Neighborhood.create({ name: attributes['DISTRICT'] })
@@ -32,7 +31,8 @@ parsed['features'].each do |result|
   green_space = GreenSpace.create!({
     name: name,
     neighborhood: neighborhood,
-    coordinates: coordinates,
+    longitude: average_lng,
+    latitude: average_lat,
     acres: acres,
     address: address
   })

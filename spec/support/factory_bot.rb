@@ -13,7 +13,8 @@ FactoryBot.define do
     name { "Bark Park" }
     description { "Lots of open space." }
     neighborhood
-    coordinates { "{ lat: 42.3566423, lng: -71.0557196 }" }
+    latitude { 42.3566423 }
+    longitude { -71.0557196 }
     address { "Boston USA" }
     acres { 12.5 }
   end
