@@ -1,7 +1,6 @@
 class GreenSpace < ApplicationRecord
   validates :name, presence: true
   validates :coordinates, presence: true
-  validates :acres, presence: true
   serialize :coordinates
 
   belongs_to :neighborhood

@@ -6,7 +6,6 @@ Feature.delete_all
 Categorization.delete_all
 Neighborhood.delete_all
 
-
 url = "http://gis.cityofboston.gov/arcgis/rest/services/EnvironmentEnergy/OpenData/MapServer/7/query?where=UPPER(OWNERSHIP)%20like%20%27%25CITY%20OF%20BOSTON%25%27%20AND%20ACRES%20%3E%3D%202%20AND%20ACRES%20%3C%3D%209000&outFields=SITE_NAME,DISTRICT,TypeLong,ACRES,ADDRESS&outSR=4326&f=json"
 json = open(url).read
 parsed = ActiveSupport::JSON.decode(json)

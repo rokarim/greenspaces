@@ -10,10 +10,12 @@ class MapTile extends Component {
     let map;
     let lat = this.props.coordinates.lat
     let lng = this.props.coordinates.lng
+    let zoom = this.props.zoom
     let initMap = () => {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: lat, lng: lng},
-        zoom: 17
+        zoom: zoom,
+        mapTypeId: 'satellite'
       })
     }
     initMap()
