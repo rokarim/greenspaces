@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, browserHistory, Route, IndexRoute } from 'react-router';
-import GreenSpaceShowContainer from './GreenSpaceShowContainer'
+import GreenSpaceShowContainer from '../containers/GreenSpaceShowContainer'
 
 const App = props => {
   return(

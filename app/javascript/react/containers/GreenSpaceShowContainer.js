@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ReviewTile from './ReviewTile'
-import FormContainer from '../containers/FormContainer'
+import ReviewTile from '../components/ReviewTile'
+import FormContainer from './FormContainer'
 import { browserHistory } from 'react-router'
 
 class GreenSpaceShowContainer extends Component {
