@@ -9,34 +9,45 @@ describe('GreenSpaceShowContainer', () => {
   let params;
 
   beforeEach(() => {
-    jasmineEnzyme();
     response = {
-      green_space:
-        { id: 1,
-          name: "Statler Park",
-          description: "I am a Park!",
-          reviews:  [
-            {
-              id: 14,
-              title: "immersive experience",
-              body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
-              rating: 4,
-              user_info: { name: "Marcel Nienow", user_id: 2 },
-              created_at: "2019-04-24T13:54:45.906Z"
-            },
-            {
-              id: 30,
-              title: "buying cycle",
-              body: "Staff was very accommodating but the chef were no nonsense. The ambiance is clean and tranquil which is perfect if youre looking to have a conversation with a date or a friend.",
-              rating: 4,
-              user_info: { name: "Sally Smith", user_id: 4 },
-              created_at: "2019-04-24T13:54:46.015Z"
+      green_space: {
+        id: 19,
+        name: "Loraine Hill Park",
+        description: "Williamsburg etsy everyday. Heirloom goth cray. Hashtag lumbersexual banh mi pork belly viral. Bitters hoodie wes anderson.",
+        reviews: [
+          {
+            id: 34,
+            title: "Review 1",
+            body: "currentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviews",
+            rating: 3,
+            created_at: "2019-04-25T21:36:44.675Z",
+            user_info: {
+              name: "notadmin notadmin",
+              user_id: 2,
+              profile_photo: {
+                url: null
+              }
             }
-          ],
-          is_admin: true,
-          user_id: 1
-        }
+          },
+          {
+            id: 46,
+            title: "Review 2",
+            body: "asbla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla blabla bla bla",
+            rating: 4,
+            created_at: "2019-04-29T17:50:28.597Z",
+            user_info: {
+              name: "testing testing",
+              user_id: 4,
+              profile_photo: {
+                url: "https://greenspaces-development.s3.amazonaws.com/uploads/user/profile_photo/4/FRONT-2.jpg"
+              }
+            }
+          }
+        ],
+        is_admin: true,
+        user_id: 4
       }
+    }
 
     params = response.green_space.id
     fetchMock.get(`/api/v1/greenspaces/${params}`, {
@@ -62,18 +73,18 @@ describe('GreenSpaceShowContainer', () => {
 
   it('should render react component with the information of the park', (done) => {
     setTimeout(() => {
-      expect(wrapper.find('h1')).toHaveText("Statler Park")
-      expect(wrapper.text()).toContain("I am a Park!")
+      expect(wrapper.find('h1')).toHaveText("Loraine Hill Park")
+      expect(wrapper.text()).toContain("Williamsburg etsy everyday.")
       done()
     }, 0);
   });
 
-  it('should render two review components', (done) => {
+  it('should render two review components wisth corresponding profile picture(if exists), title, and description', (done) => {
     setTimeout(() => {
-      expect(wrapper.text()).toContain("immersive experience")
-      expect(wrapper.text()).toContain("Staff was very accommodating but the chef were no nonsense")
-      expect(wrapper.text()).toContain("Stars: 4")
-      expect(wrapper.text()).toContain("4/24/2019")
+      expect(wrapper.text()).toContain("Review 1")
+      expect(wrapper.text()).toContain("Review 2")
+      expect(wrapper.find('img').at(1)).toHaveProp('src', "https://greenspaces-development.s3.amazonaws.com/uploads/user/profile_photo/4/FRONT-2.jpg")
+      expect(wrapper.find('img').at(0)).toHaveProp('src', null)
       done()
     }, 0);
   });
@@ -100,9 +111,9 @@ describe('GreenSpaceShowContainer', () => {
         wrapper.find('form').simulate('submit')
 
         setTimeout(() => {
-          expect(wrapper.text()).toContain("Statler Park")
-          expect(wrapper.text()).toContain("immersive experience")
-          expect(wrapper.text()).toContain("buying cycle")
+          expect(wrapper.text()).toContain("Loraine Hill Park")
+          expect(wrapper.text()).toContain("Review 1")
+          expect(wrapper.text()).toContain("Review 2")
           expect(wrapper.text()).toContain("This is a new review")
         });
       });

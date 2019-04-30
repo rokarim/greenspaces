@@ -30,7 +30,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-
+  
 end
 
 group :development do
@@ -58,3 +58,5 @@ gem 'devise'
 gem 'foundation-rails', '~> 5.0'
 gem 'webpacker', '~> 3.3'
 gem 'active_model_serializers'
+gem "carrierwave"
+gem "fog-aws"
