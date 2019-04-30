@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReviewTile from './ReviewTile'
+import MapTile from './MapTile'
 import FormContainer from '../containers/FormContainer'
 import { browserHistory } from 'react-router'
 
@@ -8,6 +9,8 @@ class GreenSpaceShowContainer extends Component {
     super(props)
     this.state = {
       space: {
+        lat: 42.3467,
+        lng: -71.0972,
         reviews: []
       },
       showForm: false
@@ -144,6 +147,10 @@ class GreenSpaceShowContainer extends Component {
       <div>
         <h1>{this.state.space.name}</h1>
         <p>{this.state.space.description}</p>
+        <MapTile
+          lat={this.state.space.lat}
+          lng={this.state.space.lng}
+        />
         <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
         {form}
         <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
