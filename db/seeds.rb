@@ -13,11 +13,30 @@ parsed = ActiveSupport::JSON.decode(json)
 parsed['features'].each do |result|
   attributes = result['attributes']
   name = attributes['SITE_NAME']
+  address = attributes['ADDRESS']
+  acres = attributes['ACRES']
+
+  bounding_array = result['geometry']['rings'][0]
+  average_lat = 0.0
+  average_lng = 0.0
+  bounding_array.each do |pair|
+    average_lng += pair[0]
+    average_lat += pair[1]
+  end
+  average_lng = average_lng / bounding_array.length
+  average_lat = average_lat / bounding_array.length
+  coordinates = { lat: average_lat, lng: average_lng }
   Feature.create({ name: attributes['TypeLong'] })
   feature = Feature.find_by(name: attributes['TypeLong'])
   Neighborhood.create({ name: attributes['DISTRICT'] })
   neighborhood = Neighborhood.find_by(name: attributes['DISTRICT'])
-  green_space = GreenSpace.create!({ name: name, neighborhood: neighborhood })
+  green_space = GreenSpace.create!({
+    name: name,
+    neighborhood: neighborhood,
+    coordinates: coordinates,
+    acres: acres,
+    address: address
+  })
   Categorization.create!({ green_space: green_space, feature: feature })
 end
 

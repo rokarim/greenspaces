@@ -9,10 +9,10 @@ class GreenSpaceShowContainer extends Component {
     super(props)
     this.state = {
       space: {
-        lat: 42.3467,
-        lng: -71.0972,
+        coordinates: { lat: 0.0, lng: 0.0 },
         reviews: []
       },
+      showMap: false,
       showForm: false
     }
     this.addReview = this.addReview.bind(this)
@@ -35,7 +35,7 @@ class GreenSpaceShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({ space: body.green_space })
+      this.setState({ space: body.green_space, showMap: true })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -145,14 +145,19 @@ class GreenSpaceShowContainer extends Component {
       )
     })
 
+    let mapTile
+    if (this.state.showMap)
+      mapTile = (
+        <MapTile
+          coordinates={this.state.space.coordinates}
+        />
+      )
+
     return(
       <div>
         <h1>{this.state.space.name}</h1>
         <p>{this.state.space.description}</p>
-        <MapTile
-          lat={this.state.space.lat}
-          lng={this.state.space.lng}
-        />
+        {mapTile}
         <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
         {form}
         <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>

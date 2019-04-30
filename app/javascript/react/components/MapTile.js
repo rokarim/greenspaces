@@ -8,8 +8,8 @@ class MapTile extends Component {
 
   componentDidMount(){
     let map;
-    let lat = this.props.lat
-    let lng = this.props.lng
+    let lat = this.props.coordinates.lat
+    let lng = this.props.coordinates.lng
     let initMap = () => {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: lat, lng: lng},
