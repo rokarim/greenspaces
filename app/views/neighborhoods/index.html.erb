@@ -1,0 +1,6 @@
+<h1 class="text-center">Neighborhoods</h1>
+<% @neighborhoods.each do |neighborhood| %>
+  <div class="column panel callout small-9 small-centered">
+    <p><%= link_to neighborhood.name, neighborhood_path(neighborhood) %></p>
+  </div>
+<% end %>
