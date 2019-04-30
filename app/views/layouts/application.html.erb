@@ -20,12 +20,19 @@
       </li>
     </ul>
 
+
     <section class="top-bar-section">
       <ul class="left">
-        <li>
-          <%= link_to 'Edit User Profile', edit_user_registration_path(current_user)%>
+        <li class="name">
+          <h1> <%= link_to 'Neighborhoods', neighborhoods_path %> </h1>
+        </li>
+        <li class="name">
+          <h1> <%= link_to 'Features', features_path %> </h1>
         </li>
         <% if user_signed_in? %>
+          <li>
+            <%= link_to 'Edit User Profile', edit_user_registration_path(current_user)%>
+          </li>
           <% if current_user.admin? %>
             <li>
               <%= link_to 'New GreenSpace', new_green_space_path %>

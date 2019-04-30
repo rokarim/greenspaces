@@ -30,7 +30,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
-  
 end
 
 group :development do
@@ -39,10 +38,8 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
 
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
 gem 'pry-rails', group: [:development, :test]
 gem 'jquery-rails'
 gem 'dotenv-rails', group: [:development, :test]

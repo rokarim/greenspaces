@@ -13,4 +13,5 @@ Rails.application.routes.draw do
     end
   end
   resources :features, only: [:index, :show]
+  resources :neighborhoods, only: [:index, :show]
 end
