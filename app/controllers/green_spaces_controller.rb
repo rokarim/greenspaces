@@ -39,7 +39,7 @@ class GreenSpacesController < ApplicationController
   private
 
   def new_green_space_params
-    params.require(:green_space).permit(:name, :description)
+    params.require(:green_space).permit(:name, :description, :acres, :address, :coordinates)
   end
 
   def authorize_user

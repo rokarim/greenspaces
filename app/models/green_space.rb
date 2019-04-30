@@ -1,5 +1,7 @@
 class GreenSpace < ApplicationRecord
   validates :name, presence: true
+  validates :coordinates, presence: true
+  serialize :coordinates
 
   belongs_to :neighborhood
   has_many :reviews, :dependent => :delete_all
