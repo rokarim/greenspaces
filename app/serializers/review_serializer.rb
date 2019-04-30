@@ -4,6 +4,6 @@ class ReviewSerializer < ActiveModel::Serializer
   belongs_to :green_space
 
     def user_info
-      { name: object.user.name, user_id: object.user.id }
+      { name: object.user.name, user_id: object.user.id, profile_photo: object.user.profile_photo }
     end
 end
