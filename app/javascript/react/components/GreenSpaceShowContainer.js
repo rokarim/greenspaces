@@ -136,7 +136,7 @@ class GreenSpaceShowContainer extends Component {
       buttonText = "Hide Form"
     }
 
-    let reviews = this.state.space.reviews.map(review => {
+    let reviews = this.state.space.reviews.reverse().map(review => {
       if(this.state.space.user_id === review.user_info.user_id) {
         reviewDeleteButton = "visible"
       }
@@ -148,6 +148,7 @@ class GreenSpaceShowContainer extends Component {
           key={review.id}
           id={review.id}
           user_id ={review.user_info.user_id}
+          user_name ={review.user_info.name}
           profile_photo={review.user_info.profile_photo.url}
           title={review.title}
           rating={review.rating}
@@ -169,18 +170,24 @@ class GreenSpaceShowContainer extends Component {
       )
 
     return(
-      <div>
-      <div className="space-info">
+      <div className="show-container">
         <h1>{this.state.space.name}</h1>
-        {mapTile}
-        <p>{this.state.space.description}</p>
-        <p>{this.state.space.address}</p>
-        <p>Acres: {this.state.space.acres}</p>
-      </div>
-        <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
-        {form}
-        <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
-        {reviews}
+        <div className="row space-show-container">
+          <div className="small-12 large-6 columns">
+            {mapTile}
+          </div>
+          <div className="small-12 large-6 columns space-info">
+            <p>{this.state.space.description}</p>
+            <p>{this.state.space.address}</p>
+            <p>{Math.round(this.state.space.acres * 10)/10} acres</p>
+            <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
+            <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
+          </div>
+        </div>
+        <div className="row">
+          {form}
+          {reviews}
+        </div>
       </div>
     )
   }
