@@ -78,6 +78,7 @@ class ReviewTile extends Component {
 
   render() {
     let profilePhoto = this.props.profilePhoto
+    let userName = this.props.userName
     let rating = this.props.rating
     let title = this.props.title
     let createdAt = this.props.createdAt
@@ -101,11 +102,12 @@ class ReviewTile extends Component {
       return`${month}/${day}/${year}`
     }
     return(
-      <div className="row column panel callout small-9 small-centered">
-        <div className="column small-1 ">
+      <div className="row column panel callout small-9 small-centered box-shadow">
+        <div className="column small-2 ">
           <img className="profile-photo-small" src={profilePhoto} />
+          <p className="user-name-container">{userName}</p>
         </div>
-        <div className="column small-8 ">
+        <div className="column small-10">
           <h3>{title}</h3>
           <p>Stars: {rating} - {date(createdAt)}</p>
           <p>{body}</p>

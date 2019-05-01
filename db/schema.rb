@@ -36,6 +36,10 @@ ActiveRecord::Schema.define(version: 2019_04_30_174751) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "neighborhood_id", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
+    t.string "address"
+    t.float "acres"
     t.index ["neighborhood_id"], name: "index_green_spaces_on_neighborhood_id"
   end
 

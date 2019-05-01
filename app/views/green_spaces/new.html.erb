@@ -11,6 +11,26 @@
   </div>
 
   <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :acres %><br />
+    <%= f.text_field :acres %>
+  </div>
+
+  <div class="field">
+    <%= f.label :latitude %><br />
+    <%= f.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= f.label :longitude %><br />
+    <%= f.text_field :longitude %>
+  </div>
+
+  <div class="field">
     <%= f.label :neighborhood %>
     <%= f.select :neighborhood, options_for_select(@neighborhoods) %>
   </div>

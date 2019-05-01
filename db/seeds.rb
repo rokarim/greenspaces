@@ -6,18 +6,36 @@ Feature.delete_all
 Categorization.delete_all
 Neighborhood.delete_all
 
-
 url = "http://gis.cityofboston.gov/arcgis/rest/services/EnvironmentEnergy/OpenData/MapServer/7/query?where=UPPER(OWNERSHIP)%20like%20%27%25CITY%20OF%20BOSTON%25%27%20AND%20ACRES%20%3E%3D%202%20AND%20ACRES%20%3C%3D%209000&outFields=SITE_NAME,DISTRICT,TypeLong,ACRES,ADDRESS&outSR=4326&f=json"
 json = open(url).read
 parsed = ActiveSupport::JSON.decode(json)
 parsed['features'].each do |result|
   attributes = result['attributes']
   name = attributes['SITE_NAME']
+  address = attributes['ADDRESS']
+  acres = attributes['ACRES']
+
+  bounding_array = result['geometry']['rings'][0]
+  average_lat = 0.0
+  average_lng = 0.0
+  bounding_array.each do |pair|
+    average_lng += pair[0]
+    average_lat += pair[1]
+  end
+  average_lng = average_lng / bounding_array.length
+  average_lat = average_lat / bounding_array.length
   Feature.create({ name: attributes['TypeLong'] })
   feature = Feature.find_by(name: attributes['TypeLong'])
   Neighborhood.create({ name: attributes['DISTRICT'] })
   neighborhood = Neighborhood.find_by(name: attributes['DISTRICT'])
-  green_space = GreenSpace.create!({ name: name, neighborhood: neighborhood })
+  green_space = GreenSpace.create!({
+    name: name,
+    neighborhood: neighborhood,
+    longitude: average_lng,
+    latitude: average_lat,
+    acres: acres,
+    address: address
+  })
   Categorization.create!({ green_space: green_space, feature: feature })
 end
 

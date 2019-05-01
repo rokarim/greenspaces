@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReviewTile from '../components/ReviewTile'
+import MapTile from '../components/MapTile'
 import FormContainer from './FormContainer'
 import { browserHistory } from 'react-router'
 
@@ -10,6 +11,7 @@ class GreenSpaceShowContainer extends Component {
       space: {
         reviews: []
       },
+      showMap: false,
       showForm: false
     }
     this.addReview = this.addReview.bind(this)
@@ -32,7 +34,22 @@ class GreenSpaceShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({ space: body.green_space })
+      let acres = body.green_space.acres
+      let zoom
+      if (acres < 12){
+        zoom = 17
+      }else if (acres < 30){
+        zoom = 16
+      }else if (acres < 60){
+        zoom = 15
+      } else {
+        zoom = 14
+      }
+      this.setState({
+        space: body.green_space,
+        showMap: true,
+        zoom: zoom
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -119,7 +136,7 @@ class GreenSpaceShowContainer extends Component {
       buttonText = "Hide Form"
     }
 
-    let reviews = this.state.space.reviews.map(review => {
+    let reviews = this.state.space.reviews.reverse().map(review => {
       if(this.state.space.user_id === review.user_info.user_id) {
         reviewDeleteButton = "visible"
       }
@@ -143,14 +160,34 @@ class GreenSpaceShowContainer extends Component {
       )
     })
 
+    let mapTile
+    if (this.state.showMap)
+      mapTile = (
+        <MapTile
+          coordinates={this.state.space.coordinates}
+          zoom={this.state.zoom}
+        />
+      )
+
     return(
-      <div>
+      <div className="show-container">
         <h1>{this.state.space.name}</h1>
-        <p>{this.state.space.description}</p>
-        <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
-        {form}
-        <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
-        {reviews}
+        <div className="row space-show-container">
+          <div className="small-12 large-6 columns">
+            {mapTile}
+          </div>
+          <div className="small-12 large-6 columns space-info">
+            <p>{this.state.space.description}</p>
+            <p>{this.state.space.address}</p>
+            <p>{Math.round(this.state.space.acres * 10)/10} acres</p>
+            <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
+            <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
+          </div>
+        </div>
+        <div className="row">
+          {form}
+          {reviews}
+        </div>
       </div>
     )
   }

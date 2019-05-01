@@ -2,7 +2,7 @@ class Api::V1::GreenSpacesController < ApplicationController
   serialization_scope :current_user
 
   def show
-    render json: GreenSpace.find(params[:id]), serializer: GreenSpaceSerializer
+    render json: GreenSpace.find(params[:id])
   end
 
   def destroy
