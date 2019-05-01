@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ReviewTile from './ReviewTile'
-import MapTile from './MapTile'
-import FormContainer from '../containers/FormContainer'
+import ReviewTile from '../components/ReviewTile'
+import MapTile from '../components/MapTile'
+import FormContainer from './FormContainer'
 import { browserHistory } from 'react-router'
 
 class GreenSpaceShowContainer extends Component {
@@ -9,7 +9,10 @@ class GreenSpaceShowContainer extends Component {
     super(props)
     this.state = {
       space: {
-        reviews: []
+        reviews: [],
+        acres: '',
+        neighborhood: {},
+        features: {}
       },
       showMap: false,
       showForm: false

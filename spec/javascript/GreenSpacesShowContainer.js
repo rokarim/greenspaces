@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock'
-import GreenSpaceShowContainer from '../../app/javascript/react/components/GreenSpaceShowContainer';
+import GreenSpaceShowContainer from '../../app/javascript/react/containers/GreenSpaceShowContainer';
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount } from 'enzyme'
 
@@ -14,6 +14,7 @@ describe('GreenSpaceShowContainer', () => {
         id: 19,
         name: "Loraine Hill Park",
         description: "Williamsburg etsy everyday. Heirloom goth cray. Hashtag lumbersexual banh mi pork belly viral. Bitters hoodie wes anderson.",
+        coordinates: {lat: 42, lng: -71},
         reviews: [
           {
             id: 34,
