@@ -9,7 +9,9 @@ class GreenSpaceShowContainer extends Component {
     super(props)
     this.state = {
       space: {
-        reviews: []
+        reviews: [],
+        neighborhood: "",
+        features: ""
       },
       showMap: false,
       showForm: false
@@ -179,6 +181,7 @@ class GreenSpaceShowContainer extends Component {
           <div className="small-12 large-6 columns space-info">
             <p>{this.state.space.description}</p>
             <p>{this.state.space.address}</p>
+            <p>{this.state.space.neighborhood.name}</p>
             <p>{Math.round(this.state.space.acres * 10)/10} acres</p>
             <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
             <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>
