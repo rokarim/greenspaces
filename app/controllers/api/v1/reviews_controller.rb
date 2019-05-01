@@ -19,8 +19,6 @@ class Api::V1::ReviewsController < ApplicationController
   end
 
   def show
-    # purpose:
-    #  * eventually: return the total number of votes
       vote = Vote.find_by(review_id: params[:id], user_id: params[:user_id])
       vote_count = 0
       Vote.where(review_id: params[:id]).each do |vote|

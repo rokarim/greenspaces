@@ -35,4 +35,10 @@ FactoryBot.define do
     green_space
     feature
   end
+
+  factory :vote do
+    thumbs { 1 }
+    user
+    review
+  end
 end

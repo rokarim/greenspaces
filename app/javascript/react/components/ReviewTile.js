@@ -11,6 +11,7 @@ class ReviewTile extends Component {
     }
     this.handleThumbsUp = this.handleThumbsUp.bind(this)
     this.handleThumbsDown = this.handleThumbsDown.bind(this)
+    this.addVote = this.addVote.bind(this)
   }
 
   componentDidMount(){
@@ -34,22 +35,46 @@ class ReviewTile extends Component {
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
 
+  addVote(thumb){
+    let payLoad = {vote: thumb}
+    fetch(`/api/v1/users/${this.props.currentUser}/reviews/${this.props.id}/votes`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payLoad)
+    })
+    .then(response => {
+      if (response.ok) {
+        return response;
+      } else {
+        let errorMessage = `${response.status}(${response.statusText})` ,
+        error = new Error(errorMessage);
+        throw(error);
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      let newCount = this.state.voteCount - this.state.thumbs + body
+      this.setState({thumbs: body, voteCount: newCount})
+      })
+    .catch(error => console.error(`Error in fetch: ${error.message}`));
+  }
+
   handleThumbsUp() {
     if (this.state.thumbs === 1) {
-      this.setState({thumbs: 0})
+      this.addVote(0)
     } else {
-      this.setState({thumbs: 1})
+      this.addVote(1)
     }
   }
 
   handleThumbsDown() {
     if (this.state.thumbs === -1) {
-      this.setState({thumbs: 0})
+      this.addVote(0)
     } else {
-      this.setState({thumbs: -1})
+      this.addVote(-1)
     }
   }
-
 
   render() {
     let profilePhoto = this.props.profilePhoto
@@ -85,10 +110,10 @@ class ReviewTile extends Component {
           <p>Stars: {rating} - {date(createdAt)}</p>
           <p>{body}</p>
           <span className={thumbsUpClass}>
-            <i className="fa fa-thumbs-up" aria-hidden="true" onClick={this.handleThumbsUp}></i>
+            <i className="fa fa-thumbs-up" id="upthumb" aria-hidden="true" onClick={this.handleThumbsUp}></i>
           </span>
           <span className={thumbsDownClass}>
-          <i className="fa fa-thumbs-down" aria-hidden="true" onClick={this.handleThumbsDown}></i>
+          <i className="fa fa-thumbs-down" id="downthumb" aria-hidden="true" onClick={this.handleThumbsDown}></i>
           </span>
           <p>{this.state.voteCount}</p>
           <button id='deleteReviewButton' className={deleteButtonShow} onClick={deleteReview}>Delete Review</button>

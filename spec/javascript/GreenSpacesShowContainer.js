@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock'
-import GreenSpaceShowContainer from '../../app/javascript/react/components/GreenSpaceShowContainer';
+import GreenSpaceShowContainer from '../../app/javascript/react/containers/GreenSpaceShowContainer';
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount } from 'enzyme'
 
@@ -64,6 +64,20 @@ describe('GreenSpaceShowContainer', () => {
         green_space_id: 1 })
     });
 
+    fetchMock.get(`/api/v1/users/4/reviews/34`, {
+      status: 200,
+      body: {vote: 1, vote_count: 39}
+    });
+
+    fetchMock.get(`/api/v1/users/4/reviews/46`, {
+      status: 200,
+      body: {vote: 6, vote_count: 121}
+    });
+
+    fetchMock.post(`/api/v1/users/4/reviews/34/votes`, {
+      body: JSON.stringify({vote: 1})
+    });
+
     wrapper = mount(
       <GreenSpaceShowContainer  params= { {id: params} } />
     )
@@ -79,10 +93,13 @@ describe('GreenSpaceShowContainer', () => {
     }, 0);
   });
 
-  it('should render two review components wisth corresponding profile picture(if exists), title, and description', (done) => {
+  it('should render two review components with corresponding profile picture(if exists), title, description, thumbs up and down buttons, and vote count', (done) => {
     setTimeout(() => {
       expect(wrapper.text()).toContain("Review 1")
       expect(wrapper.text()).toContain("Review 2")
+      expect(wrapper.text()).toContain("39")
+      expect(wrapper.text()).toContain("121")
+      expect(wrapper.exists('.upthumb')).to.equal(true)
       expect(wrapper.find('img').at(1)).toHaveProp('src', "https://greenspaces-development.s3.amazonaws.com/uploads/user/profile_photo/4/FRONT-2.jpg")
       expect(wrapper.find('img').at(0)).toHaveProp('src', null)
       done()
