@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ReviewTile from './ReviewTile'
+import MapTile from './MapTile'
 import FormContainer from '../containers/FormContainer'
 import { browserHistory } from 'react-router'
 
@@ -10,6 +11,7 @@ class GreenSpaceShowContainer extends Component {
       space: {
         reviews: []
       },
+      showMap: false,
       showForm: false
     }
     this.addReview = this.addReview.bind(this)
@@ -32,7 +34,22 @@ class GreenSpaceShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      this.setState({ space: body.green_space })
+      let acres = body.green_space.acres
+      let zoom
+      if (acres < 12){
+        zoom = 17
+      }else if (acres < 30){
+        zoom = 16
+      }else if (acres < 60){
+        zoom = 15
+      } else {
+        zoom = 14
+      }
+      this.setState({
+        space: body.green_space,
+        showMap: true,
+        zoom: zoom
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -142,10 +159,24 @@ class GreenSpaceShowContainer extends Component {
       )
     })
 
+    let mapTile
+    if (this.state.showMap)
+      mapTile = (
+        <MapTile
+          coordinates={this.state.space.coordinates}
+          zoom={this.state.zoom}
+        />
+      )
+
     return(
       <div>
+      <div className="space-info">
         <h1>{this.state.space.name}</h1>
+        {mapTile}
         <p>{this.state.space.description}</p>
+        <p>{this.state.space.address}</p>
+        <p>Acres: {this.state.space.acres}</p>
+      </div>
         <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
         {form}
         <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>

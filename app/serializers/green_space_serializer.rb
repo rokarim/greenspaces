@@ -1,5 +1,5 @@
 class GreenSpaceSerializer < ActiveModel::Serializer
-  attributes :id, :name, :description, :reviews, :is_admin, :user_id
+  attributes :id, :name, :description, :acres, :address, :coordinates, :reviews, :is_admin, :user_id
 
   has_many :reviews
 
