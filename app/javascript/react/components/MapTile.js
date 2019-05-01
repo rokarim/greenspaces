@@ -14,8 +14,7 @@ class MapTile extends Component {
     let initMap = () => {
       map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: lat, lng: lng},
-        zoom: zoom,
-        mapTypeId: 'satellite'
+        zoom: zoom
       })
     }
     initMap()
@@ -24,7 +23,7 @@ class MapTile extends Component {
   render() {
 
     return(
-      <div id="map"></div>
+      <div id="map" className="box-shadow"></div>
     )
   }
 }

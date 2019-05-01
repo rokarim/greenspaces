@@ -25,7 +25,7 @@ describe('GreenSpaceShowContainer', () => {
               name: "notadmin notadmin",
               user_id: 2,
               profile_photo: {
-                url: null
+                url: "https://greenspaces-production.s3.amazonaws.com/default/treeicon-green.png"
               }
             }
           },
@@ -83,8 +83,8 @@ describe('GreenSpaceShowContainer', () => {
     setTimeout(() => {
       expect(wrapper.text()).toContain("Review 1")
       expect(wrapper.text()).toContain("Review 2")
-      expect(wrapper.find('img').at(1)).toHaveProp('src', "https://greenspaces-development.s3.amazonaws.com/uploads/user/profile_photo/4/FRONT-2.jpg")
-      expect(wrapper.find('img').at(0)).toHaveProp('src', null)
+      expect(wrapper.find('img').at(0)).toHaveProp('src', "https://greenspaces-development.s3.amazonaws.com/uploads/user/profile_photo/4/FRONT-2.jpg")
+      expect(wrapper.find('img').at(1)).toHaveProp('src', "https://greenspaces-production.s3.amazonaws.com/default/treeicon-green.png")
       done()
     }, 0);
   });
