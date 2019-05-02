@@ -16,8 +16,8 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
   end
   describe "DELETE#destroy" do
     it "should delete a review" do
-      g = FactoryBot.create(:green_space, name: "Your Backyard")
-      review = FactoryBot.create(:review, green_space: g)
+      green_space = FactoryBot.create(:green_space, name: "Your Backyard")
+      review = FactoryBot.create(:review, green_space: green_space)
       params ={id: review.id}
       delete :destroy, params: params
       expect(Review.all.length).to eq 0
@@ -25,10 +25,10 @@ RSpec.describe Api::V1::ReviewsController, type: :controller do
   end
   describe "GET#show" do
     it "should return a thumbs vote and vote count" do
-      u = FactoryBot.create(:user)
-      r = FactoryBot.create(:review, user: u, green_space: FactoryBot.create(:green_space, name: "ABLADEMY"))
-      FactoryBot.create(:vote, user_id: u.id, review_id: r.id)
-      params ={id: r.id, user_id: u.id}
+      user = FactoryBot.create(:user)
+      review = FactoryBot.create(:review, user: user, green_space: FactoryBot.create(:green_space, name: "ABLADEMY"))
+      FactoryBot.create(:vote, user: user, review: review)
+      params = {id: review.id, user_id: user.id}
       get :show, params: params
       returned_json = JSON.parse(response.body)
 

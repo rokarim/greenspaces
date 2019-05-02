@@ -75,7 +75,6 @@ class GreenSpaceShowContainer extends Component {
     .then(body => {
       let currentState = this.state.space
       currentState.reviews = currentState.reviews.concat(body.review)
-      debugger
       this.setState({
         space: currentState,
         showForm: false
