@@ -54,7 +54,6 @@ class GreenSpaceShowContainer extends Component {
         showMap: true,
         zoom: zoom
       })
-      debugger
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
