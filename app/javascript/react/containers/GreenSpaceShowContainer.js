@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ReviewTile from './ReviewTile'
-import MapTile from './MapTile'
-import FormContainer from '../containers/FormContainer'
+import ReviewTile from '../components/ReviewTile'
+import MapTile from '../components/MapTile'
+import FormContainer from './FormContainer'
 import { browserHistory } from 'react-router'
 
 class GreenSpaceShowContainer extends Component {
@@ -10,8 +10,9 @@ class GreenSpaceShowContainer extends Component {
     this.state = {
       space: {
         reviews: [],
-        neighborhood: "",
-        features: ""
+        acres: '',
+        neighborhood: {},
+        features: {}
       },
       showMap: false,
       showForm: false
@@ -47,11 +48,13 @@ class GreenSpaceShowContainer extends Component {
       } else {
         zoom = 14
       }
+
       this.setState({
         space: body.green_space,
         showMap: true,
         zoom: zoom
       })
+      debugger
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
