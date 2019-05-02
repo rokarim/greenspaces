@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ReviewTile from './ReviewTile'
-import MapTile from './MapTile'
-import FormContainer from '../containers/FormContainer'
+import ReviewTile from '../components/ReviewTile'
+import MapTile from '../components/MapTile'
+import FormContainer from './FormContainer'
 import { browserHistory } from 'react-router'
 
 class GreenSpaceShowContainer extends Component {
@@ -9,7 +9,10 @@ class GreenSpaceShowContainer extends Component {
     super(props)
     this.state = {
       space: {
-        reviews: []
+        reviews: [],
+        acres: '',
+        neighborhood: {},
+        features: {}
       },
       showMap: false,
       showForm: false
@@ -45,6 +48,7 @@ class GreenSpaceShowContainer extends Component {
       } else {
         zoom = 14
       }
+
       this.setState({
         space: body.green_space,
         showMap: true,
@@ -179,6 +183,7 @@ class GreenSpaceShowContainer extends Component {
           <div className="small-12 large-6 columns space-info">
             <p>{this.state.space.description}</p>
             <p>{this.state.space.address}</p>
+            <p>{this.state.space.neighborhood.name}</p>
             <p>{Math.round(this.state.space.acres * 10)/10} acres</p>
             <button id='deleteButton' className={deleteButton} onClick={this.deleteElement}>Delete</button>
             <button id='newReviewButton' className={newButton} onClick={handleClick}>{buttonText}</button>

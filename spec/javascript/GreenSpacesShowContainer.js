@@ -1,5 +1,5 @@
 import fetchMock from 'fetch-mock'
-import GreenSpaceShowContainer from '../../app/javascript/react/components/GreenSpaceShowContainer';
+import GreenSpaceShowContainer from '../../app/javascript/react/containers/GreenSpaceShowContainer';
 import jasmineEnzyme from 'jasmine-enzyme'
 import { mount } from 'enzyme'
 
@@ -14,6 +14,9 @@ describe('GreenSpaceShowContainer', () => {
         id: 19,
         name: "Loraine Hill Park",
         description: "Williamsburg etsy everyday. Heirloom goth cray. Hashtag lumbersexual banh mi pork belly viral. Bitters hoodie wes anderson.",
+        address: "2060 Commonwealth Ave.",
+        acres: 20.7722,
+        coordinates: {lat: 42, lng: -71},
         reviews: [
           {
             id: 34,
@@ -45,7 +48,18 @@ describe('GreenSpaceShowContainer', () => {
           }
         ],
         is_admin: true,
-        user_id: 4
+        user_id: 4,
+        neighborhood:
+        {
+          id: 5,
+          name: "Charlestown"
+        },
+        features: [
+        {
+          id: 2,
+          name: "Parks, Playgrounds & Athletic Fields"
+        }
+        ]
       }
     }
 
@@ -73,8 +87,12 @@ describe('GreenSpaceShowContainer', () => {
 
   it('should render react component with the information of the park', (done) => {
     setTimeout(() => {
+      console.log(wrapper.debug());
       expect(wrapper.find('h1')).toHaveText("Loraine Hill Park")
       expect(wrapper.text()).toContain("Williamsburg etsy everyday.")
+      expect(wrapper.text()).toContain("2060 Commonwealth Ave.")
+      expect(wrapper.text()).toContain("Charlestown")
+      expect(wrapper.text()).toContain("20.8")
       done()
     }, 0);
   });
@@ -107,7 +125,6 @@ describe('GreenSpaceShowContainer', () => {
         wrapper.find('#title').simulate('change', { target: { value: 'This is a new review' } })
         wrapper.find('#rating').simulate('change', { target: { value: '3' } })
         wrapper.find('#body').simulate('change', { target: { value: 'This is the body for the new review and should be larger than 40 characters.' } })
-
         wrapper.find('form').simulate('submit')
 
         setTimeout(() => {
