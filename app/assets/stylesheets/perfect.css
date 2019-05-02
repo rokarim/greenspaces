@@ -1,13 +1,13 @@
 body {
-  background-color: #b4debe
+  background-color: #b4debe;
 }
 
 .top-bar {
-  background-color: #4a403d
+  background-color: #4a403d;
 }
 
 .panel.callout {
-  background-color: #facf7d
+  background-color: #facf7d;
 }
 
 h1 {
@@ -17,4 +17,16 @@ h1 {
 
 p {
   font-family: 'Open Sans', sans-serif;
+}
+
+.fa {
+  margin-right: 10px;
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
 }

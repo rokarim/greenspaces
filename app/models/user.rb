@@ -5,12 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   mount_uploader :profile_photo, ProfilePhotoUploader
-  
+
   validates :first_name, presence: true
   validates :last_name, presence: true
 
   has_many :reviews
   has_many :green_spaces, through: :reviews
+  has_many :votes
 
   def name
     "#{first_name} #{last_name}"

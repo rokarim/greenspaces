@@ -10,6 +10,11 @@ Rails.application.routes.draw do
         resources :reviews, only: [:create]
       end
       resources :reviews, only: [:destroy]
+      resources :users, only: [] do
+        resources :reviews, only: [:show] do
+          resources :votes, only: [:create]
+        end
+      end
       post '/greenspaces/search', to: 'green_spaces#search'
     end
   end

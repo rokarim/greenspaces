@@ -21,7 +21,7 @@ describe('GreenSpaceShowContainer', () => {
           {
             id: 34,
             title: "Review 1",
-            body: "currentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviewscurrentState.reviews",
+            body: "OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW OMG REVIEW WOW",
             rating: 3,
             created_at: "2019-04-25T21:36:44.675Z",
             user_info: {
@@ -63,23 +63,13 @@ describe('GreenSpaceShowContainer', () => {
       }
     }
 
-    params = response.green_space.id
-    fetchMock.get(`/api/v1/greenspaces/${params}`, {
+    fetchMock.get(`/api/v1/greenspaces/19`, {
       status: 200,
       body: response
     });
 
-    fetchMock.post(`/api/v1/greenspaces/${params}/reviews`, {
-      body: JSON.stringify({
-        title: 'This is a new review',
-        rating: '3',
-        body: 'This is the body for the new review and should be larger than 40 characters.',
-        user_id: 1,
-        green_space_id: 1 })
-    });
-
     wrapper = mount(
-      <GreenSpaceShowContainer  params= { {id: params} } />
+      <GreenSpaceShowContainer  params= { {id: 19} } />
     )
   })
 
@@ -97,7 +87,7 @@ describe('GreenSpaceShowContainer', () => {
     }, 0);
   });
 
-  it('should render two review components wisth corresponding profile picture(if exists), title, and description', (done) => {
+  it('should render two review components with corresponding profile picture(if exists), title, description, thumbs up and down buttons, and vote count', (done) => {
     setTimeout(() => {
       expect(wrapper.text()).toContain("Review 1")
       expect(wrapper.text()).toContain("Review 2")
@@ -114,27 +104,42 @@ describe('GreenSpaceShowContainer', () => {
       expect(wrapper.text()).toContain("Title")
       expect(wrapper.text()).toContain("Rating")
       expect(wrapper.text()).toContain("Body")
-      done()
     }, 0);
+    done()
   });
 
   it('should be able to add a new review for a green space', (done) => {
-    setTimeout(() => {
-      wrapper.find('#newReviewButton').simulate('click')
-      setTimeout(() => {
-        wrapper.find('#title').simulate('change', { target: { value: 'This is a new review' } })
-        wrapper.find('#rating').simulate('change', { target: { value: '3' } })
-        wrapper.find('#body').simulate('change', { target: { value: 'This is the body for the new review and should be larger than 40 characters.' } })
-        wrapper.find('form').simulate('submit')
+    fetchMock.post(`/api/v1/greenspaces/19/reviews`, {
+      body: {review: {
+          title: 'This is a new review',
+          rating: '3',
+          body: 'This is the body for the new review and should be larger than 40 characters.',
+          id: 76,
+          created_at: "2019-05-02T14:54:19.354Z",
+          green_space: {
+            id: 19,
+            name: "Loraine Hill Park",
+            description: "Williamsburg etsy everyday. Heirloom goth cray. Hashtag lumbersexual banh mi pork belly viral. Bitters hoodie wes anderson.",
+          },
+          user_info: {
+            name: "Bart Simpson",
+            user_id: 4,
+            profile_photo: {url: "https://greenspaces-production.s3.amazonaws.com/default/treeicon-green.png"}
+          }
+        }}
+    });
 
-        setTimeout(() => {
-          expect(wrapper.text()).toContain("Loraine Hill Park")
-          expect(wrapper.text()).toContain("Review 1")
-          expect(wrapper.text()).toContain("Review 2")
-          expect(wrapper.text()).toContain("This is a new review")
-        });
-      });
-      done()
+    fetchMock.get(`/api/v1/users/4/reviews/76`, {
+      status: 200,
+      body: {vote: 0, vote_count: 0}
+    });
+
+    setTimeout(() => {
+      wrapper.find('form').simulate('submit')
+      setTimeout(() => {
+        expect(wrapper.text()).toContain("This is a new review")
+        done()
+      }, 1);
     }, 0);
   });
 });

@@ -6,4 +6,5 @@ class Review < ApplicationRecord
   belongs_to :user
   belongs_to :green_space
   validates :user_id, uniqueness: { scope: [:green_space_id] }
+  has_many :votes
 end

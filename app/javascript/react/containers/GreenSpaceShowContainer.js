@@ -151,9 +151,10 @@ class GreenSpaceShowContainer extends Component {
         <ReviewTile
           key={review.id}
           id={review.id}
-          user_id ={review.user_info.user_id}
-          user_name ={review.user_info.name}
-          profile_photo={review.user_info.profile_photo.url}
+          currentUser={this.state.space.user_id}
+          userId={review.user_info.user_id}
+          userName={review.user_info.name}
+          profilePhoto={review.user_info.profile_photo.url}
           title={review.title}
           rating={review.rating}
           body={review.body}
@@ -165,13 +166,19 @@ class GreenSpaceShowContainer extends Component {
     })
 
     let mapTile
-    if (this.state.showMap)
+    let coords = { lat: 42.314 , lng: -71.11 }
+    let zoom = 12
+    if (this.state.showMap){
+      if(this.state.space.coordinates){
+        coords = this.state.space.coordinates
+        zoom = this.state.zoom
+      }
       mapTile = (
         <MapTile
-          coordinates={this.state.space.coordinates}
-          zoom={this.state.zoom}
+          coordinates={coords}
+          zoom={zoom}
         />
-      )
+      )}
 
     return(
       <div className="show-container">

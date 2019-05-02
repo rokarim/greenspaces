@@ -54,4 +54,12 @@ when "development"
       Review.create(arguments)
     end
   end
+
+  User.all.each do |user|
+    thumbs = [-1, 1, 1]
+    10.times do
+      review = Review.all.sample
+      Vote.create(user: user, review: review, thumbs: thumbs.sample)
+    end
+  end
 end
