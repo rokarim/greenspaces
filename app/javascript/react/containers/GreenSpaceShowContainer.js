@@ -75,6 +75,7 @@ class GreenSpaceShowContainer extends Component {
     .then(body => {
       let currentState = this.state.space
       currentState.reviews = currentState.reviews.concat(body.review)
+      debugger
       this.setState({
         space: currentState,
         showForm: false
@@ -149,6 +150,7 @@ class GreenSpaceShowContainer extends Component {
           id={review.id}
           currentUser={this.state.space.user_id}
           userId={review.user_info.user_id}
+          userName={review.user_info.name}
           profilePhoto={review.user_info.profile_photo.url}
           title={review.title}
           rating={review.rating}
@@ -161,13 +163,19 @@ class GreenSpaceShowContainer extends Component {
     })
 
     let mapTile
-    if (this.state.showMap)
+    let coords = { lat: 42.314 , lng: -71.11 }
+    let zoom = 12
+    if (this.state.showMap){
+      if(this.state.space.coordinates){
+        coords = this.state.space.coordinates
+        zoom = this.state.zoom
+      }
       mapTile = (
         <MapTile
-          coordinates={this.state.space.coordinates}
-          zoom={this.state.zoom}
+          coordinates={coords}
+          zoom={zoom}
         />
-      )
+      )}
 
     return(
       <div className="show-container">
