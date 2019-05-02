@@ -26,7 +26,6 @@ class GreenSpaceIndexContainer extends Component {
       return response.json();
     })
     .then(body => {
-      debugger
       this.setState({ spaces: body.green_spaces })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -47,8 +46,7 @@ class GreenSpaceIndexContainer extends Component {
       body: body,
       credentials: 'same-origin',
       headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-    })
-
+      })
       .then(response => {
         if (response.ok) {
           return response;
