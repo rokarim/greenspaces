@@ -14,6 +14,9 @@ describe('GreenSpaceShowContainer', () => {
         id: 19,
         name: "Loraine Hill Park",
         description: "Williamsburg etsy everyday. Heirloom goth cray. Hashtag lumbersexual banh mi pork belly viral. Bitters hoodie wes anderson.",
+        address: "2060 Commonwealth Ave.",
+        acres: 20.7722,
+        coordinates: {lat: 42, lng: -71},
         reviews: [
           {
             id: 34,
@@ -45,7 +48,18 @@ describe('GreenSpaceShowContainer', () => {
           }
         ],
         is_admin: true,
-        user_id: 4
+        user_id: 4,
+        neighborhood:
+        {
+          id: 5,
+          name: "Charlestown"
+        },
+        features: [
+        {
+          id: 2,
+          name: "Parks, Playgrounds & Athletic Fields"
+        }
+        ]
       }
     }
 
@@ -63,8 +77,12 @@ describe('GreenSpaceShowContainer', () => {
 
   it('should render react component with the information of the park', (done) => {
     setTimeout(() => {
+      console.log(wrapper.debug());
       expect(wrapper.find('h1')).toHaveText("Loraine Hill Park")
       expect(wrapper.text()).toContain("Williamsburg etsy everyday.")
+      expect(wrapper.text()).toContain("2060 Commonwealth Ave.")
+      expect(wrapper.text()).toContain("Charlestown")
+      expect(wrapper.text()).toContain("20.8")
       done()
     }, 0);
   });

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :green_spaces, path: "greenspaces", only: [:show, :destroy] do
+      resources :green_spaces, path: "greenspaces", only: [:index, :show, :destroy] do
         resources :reviews, only: [:create]
       end
       resources :reviews, only: [:destroy]
@@ -15,6 +15,7 @@ Rails.application.routes.draw do
           resources :votes, only: [:create]
         end
       end
+      post '/greenspaces/search', to: 'green_spaces#search'
     end
   end
   resources :features, only: [:index, :show]
