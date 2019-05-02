@@ -16,7 +16,7 @@ h1 {
 }
 
 p {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 .fa {
@@ -29,4 +29,30 @@ p {
 
 .red {
   color: red;
+}
+
+.index-title {
+  text-align: center;
+}
+.search-bar {
+  display: inline-flex;
+  position: absolute;
+  top: 50px;
+  right: 0;
+}
+
+.search-bar input {
+  height: 3rem;
+}
+
+.search-bar .Search {
+  color: white;
+}
+
+.search-bar .inputField {
+  width: 16rem;
+}
+
+.show-box {
+  height: 65px;
 }
