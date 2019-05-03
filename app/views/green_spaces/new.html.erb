@@ -1,41 +1,45 @@
-<h1>New Green Space Form</h1>
-<%= form_for(@green_space) do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
+<div class="log-in-wrapper">
+  <div class="log-in-container">
+  <h1>New Green Space Form</h1>
+  <%= form_for(@green_space) do |f| %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
 
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
+    <div class="field">
+      <%= f.label :description %><br />
+      <%= f.text_field :description %>
+    </div>
 
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
+    <div class="field">
+      <%= f.label :address %><br />
+      <%= f.text_field :address %>
+    </div>
 
-  <div class="field">
-    <%= f.label :acres %><br />
-    <%= f.text_field :acres %>
-  </div>
+    <div class="field">
+      <%= f.label :acres %><br />
+      <%= f.text_field :acres %>
+    </div>
 
-  <div class="field">
-    <%= f.label :latitude %><br />
-    <%= f.text_field :latitude %>
-  </div>
+    <div class="field">
+      <%= f.label :latitude %><br />
+      <%= f.text_field :latitude %>
+    </div>
 
-  <div class="field">
-    <%= f.label :longitude %><br />
-    <%= f.text_field :longitude %>
-  </div>
+    <div class="field">
+      <%= f.label :longitude %><br />
+      <%= f.text_field :longitude %>
+    </div>
 
-  <div class="field">
-    <%= f.label :neighborhood %>
-    <%= f.select :neighborhood, options_for_select(@neighborhoods) %>
-  </div>
+    <div class="field">
+      <%= f.label :neighborhood %>
+      <%= f.select :neighborhood, options_for_select(@neighborhoods) %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Add Green Space"%>
+    <div class="actions">
+      <%= f.submit "Add Green Space"%>
+    </div>
+  <% end %>
   </div>
-<% end %>
+</div>
