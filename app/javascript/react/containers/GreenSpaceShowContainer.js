@@ -153,6 +153,8 @@ class GreenSpaceShowContainer extends Component {
     let reviews = this.state.space.reviews.map(review => {
       if(this.state.space.user_id === review.user_info.user_id) {
         reviewDeleteButton = "visible"
+      } else {
+        reviewDeleteButton = "hidden"
       }
       let handleDelete = () => {
         this.deleteReview(review)
