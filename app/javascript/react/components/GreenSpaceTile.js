@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const GreenSpaceTile = props => {
   return(
-    <div className="column panel callout small-9 small-centered box-shadow">
+    <div className="column panel callout small-4 box-shadow text-center show-box">
       <Link to ={`/greenspaces/${props.id}`}><p className="index-item">{props.name}</p></Link>
     </div>
   )

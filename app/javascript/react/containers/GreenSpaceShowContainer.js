@@ -15,7 +15,8 @@ class GreenSpaceShowContainer extends Component {
         features: {}
       },
       showMap: false,
-      showForm: false
+      showForm: false,
+      errors: null
     }
     this.addReview = this.addReview.bind(this)
     this.deleteElement = this.deleteElement.bind(this)
@@ -48,9 +49,10 @@ class GreenSpaceShowContainer extends Component {
       } else {
         zoom = 14
       }
-
+      let greenSpace = body.green_space
+      greenSpace.reviews = body.green_space.reviews.reverse()
       this.setState({
-        space: body.green_space,
+        space: greenSpace,
         showMap: true,
         zoom: zoom
       })
@@ -77,12 +79,17 @@ class GreenSpaceShowContainer extends Component {
     })
     .then(response => response.json())
     .then(body => {
-      let currentState = this.state.space
-      currentState.reviews = currentState.reviews.concat(body.review)
-      this.setState({
-        space: currentState,
-        showForm: false
-      })
+      if(body.error){
+        this.setState({ errors: body.error })
+      } else {
+        let currentState = this.state.space
+        let newReview = [body.review]
+        currentState.reviews = newReview.concat(currentState.reviews)
+        this.setState({
+          space: currentState,
+          showForm: false
+        })
+      }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`));
   }
@@ -136,11 +143,14 @@ class GreenSpaceShowContainer extends Component {
     }
 
     if (this.state.showForm === true){
-      form = <FormContainer addReview={this.addReview}/>
+      form = <FormContainer
+        addReview={this.addReview}
+        errors={this.state.errors}
+      />
       buttonText = "Hide Form"
     }
 
-    let reviews = this.state.space.reviews.reverse().map(review => {
+    let reviews = this.state.space.reviews.map(review => {
       if(this.state.space.user_id === review.user_info.user_id) {
         reviewDeleteButton = "visible"
       }

@@ -31,6 +31,11 @@ class FormContainer extends React.Component {
   }
 
   render() {
+    let errors
+    if (!this.props.errors){
+      errors = this.props.errors
+    }
+
     return(
       <div className='form'>
       <h3>New Review</h3>
@@ -58,6 +63,9 @@ class FormContainer extends React.Component {
         />
         <div className="button-container" >
           <input className="button" type="submit" value="Submit" />
+        </div>
+        <div>
+          <p>{this.props.errors}</p>
         </div>
       </form>
       </div>

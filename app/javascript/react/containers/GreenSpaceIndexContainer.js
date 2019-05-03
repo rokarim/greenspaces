@@ -60,7 +60,7 @@ class GreenSpaceIndexContainer extends Component {
         return response.json();
       })
       .then(body => {
-        this.setState({ spaces: body.green_spaces, searchString: '' })
+        this.setState({ spaces: body.green_spaces, searchString: ""})
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))  }
 
@@ -76,12 +76,16 @@ class GreenSpaceIndexContainer extends Component {
     })
     return(
       <div>
-        <h1 className="text-center">Green Spaces</h1>
-          <form className= "search-bar" onSubmit={this.handleSubmit}>
-            <input type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
-            <input type='submit' value='Search' />
-          </form>
-        {greenspaces}
+      <div className="top-row">
+        <h1 className="index-title">Green Spaces</h1>
+        <form className= "search-bar" onSubmit={this.handleSubmit}>
+          <input className="inputField" type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
+          <input className="Search" type='submit' value='Search' />
+        </form>
+      </div>
+        <div className="row">
+          {greenspaces}
+        </div>
       </div>
     )
   }

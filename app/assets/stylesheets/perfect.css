@@ -70,3 +70,30 @@ label{
   background-color: #ebf2bf;
   display: inline-block;
 }
+
+.index-title {
+  text-align: center;
+}
+
+.search-bar {
+  display: inline-flex;
+  position: absolute;
+  top: 50px;
+  right: 0;
+}
+
+.search-bar input {
+  height: 3rem;
+}
+
+.search-bar .Search {
+  color: white;
+}
+
+.search-bar .inputField {
+  width: 16rem;
+}
+
+.show-box {
+  height: 65px;
+}
