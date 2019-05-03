@@ -18,7 +18,7 @@ body {
 }
 
 .panel.callout p{
-  font-size: 2rem;
+  font-size: 150%;
 }
 
 .index-item,
@@ -29,7 +29,7 @@ body {
 h1, h2 {
   font-family: 'Amatic SC', bold;
   text-align: center;
-  font-size: 1.6rem;
+  font-size: 2.7rem;
 }
 
 p {
@@ -67,6 +67,21 @@ label{
   font-size: 1.8rem;
 }
 
+.top-row {
+  float: right;
+}
+
+.rowrow{
+  text-align: center;
+}
+
+.search-bar {
+  display: inline-flex;
+  float: right;
+  top: 50px;
+  right: 0;
+}
+
 .title-container{
   text-align: center;
 }
@@ -79,13 +94,7 @@ label{
 .index-title {
   text-align: center;
   display: inline-flex;
-}
-
-.search-bar {
-  display: inline-flex;
-  float: right;
-  top: 50px;
-  right: 0;
+  padding-left: 16%
 }
 
 .top-row{

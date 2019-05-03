@@ -76,14 +76,16 @@ class GreenSpaceIndexContainer extends Component {
     })
     return(
       <div>
-      <div className="top-row">
-        <h1 className="index-title">Green Spaces</h1>
-        <form className= "search-bar" onSubmit={this.handleSubmit}>
-          <input className="inputField" type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
-          <input className="Search" type='submit' value='Search' />
-        </form>
-      </div>
-        <div className="row">
+        <div className="rowrow">
+          <h1 className="index-title">Green Spaces</h1>
+          <div className="top-row">
+            <form className= "search-bar" onSubmit={this.handleSubmit}>
+            <input className="inputField" type='text' name='searchString' value={this.state.searchString} onChange={this.handleChange} />
+            <input className="Search green-button" type='submit' value='Search' />
+            </form>
+          </div>
+        </div>
+        <div className="">
           {greenspaces}
         </div>
       </div>
