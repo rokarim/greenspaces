@@ -6,6 +6,11 @@ body {
   font-family: 'Amatic SC', bold;
 }
 
+.top-bar-section ul li > a {
+  font-family: 'Amatic SC', bold;
+  font-size: 1.3rem
+}
+
 .panel.callout {
   background-color: #facf7d;
   opacity: 0.8;
@@ -73,13 +78,18 @@ label{
 
 .index-title {
   text-align: center;
+  display: inline-flex;
 }
 
 .search-bar {
   display: inline-flex;
-  position: absolute;
+  float: right;
   top: 50px;
   right: 0;
+}
+
+.top-row{
+  text-align: center;
 }
 
 .search-bar input {
