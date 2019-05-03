@@ -182,9 +182,11 @@ class GreenSpaceShowContainer extends Component {
 
     return(
       <div className="show-container">
-        <h1>{this.state.space.name}</h1>
+        <div className="title-container">
+          <h1>{this.state.space.name}</h1>
+        </div>
         <div className="row space-show-container">
-          <div className="small-12 large-6 columns">
+          <div className="small-12 large-6 columns map">
             {mapTile}
           </div>
           <div className="small-12 large-6 columns space-info">
