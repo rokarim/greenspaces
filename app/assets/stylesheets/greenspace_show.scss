@@ -2,6 +2,12 @@
   width: 25rem;
   height: 25rem;
   margin: auto;
+  border-radius: 5px;
+  float:left
+}
+
+.map{
+  float: left;
 }
 
 .box-shadow{
@@ -25,4 +31,15 @@
 .user-name-container{
   padding-top: 5px;
   font-family: 'Artifika', serif;
+}
+
+.fa-leaf{
+  color: #014421;
+}
+p.user-name-container{
+  font-family: 'Coda', cursive;
+}
+
+h3 {
+  font-family: 'Coda', cursive;
 }

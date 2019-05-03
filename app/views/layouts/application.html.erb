@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Artifika|Lato" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Coda" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <title>Greenspaces</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,15 +13,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
   <nav class="top-bar">
     <ul class="title-area">
       <li class="name">
         <h1><a href="/">Greenspaces</a></h1>
       </li>
     </ul>
-
-
     <section class="top-bar-section">
       <ul class="left">
         <li class="name">
@@ -30,19 +28,15 @@
           <h1> <%= link_to 'Features', features_path %> </h1>
         </li>
         <% if user_signed_in? %>
-          <li>
-            <%= link_to 'Edit User Profile', edit_user_registration_path(current_user)%>
+          <li class="name">
+            <h1> <%= link_to 'Edit User Profile', edit_user_registration_path(current_user)%> </h1>
           </li>
           <% if current_user.admin? %>
-            <li>
-              <%= link_to 'New GreenSpace', new_green_space_path %>
+            <li class="name">
+              <h1> <%= link_to 'New GreenSpace', new_green_space_path %> </h1>
             </li>
           <% end %>
         <% end %>
-        <li>
-          <div id="search-bar">
-          </div>
-        </li>
       </ul>
       <ul class="right">
         <%- if current_user -%>

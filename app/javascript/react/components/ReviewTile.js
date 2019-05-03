@@ -13,24 +13,26 @@ class ReviewTile extends Component {
   }
 
   componentDidMount(){
-    fetch(`/api/v1/users/${this.props.currentUser}/reviews/${this.props.id}`,
-      { credentials: 'same-origin' })
-    .then(response => {
-      if (response.ok) {
-        return response;
-      } else {
-        let errorMessage = `${response.status}(${response.statusText})` ,
-        error = new Error(errorMessage);
-        throw(error);
-      }
-    })
-    .then(response => response.json())
-    .then(body => {
-      if(body !== null) {
-        this.setState({ thumbs: body.vote, voteCount: body.vote_count })
-      }
-    })
-    .catch(error => console.error(`Error in fetch: ${error.message}`));
+    if (this.props.currentUser !== ""){
+      fetch(`/api/v1/users/${this.props.currentUser}/reviews/${this.props.id}`,
+        { credentials: 'same-origin' })
+      .then(response => {
+        if (response.ok) {
+          return response;
+        } else {
+          let errorMessage = `${response.status}(${response.statusText})` ,
+          error = new Error(errorMessage);
+          throw(error);
+        }
+      })
+      .then(response => response.json())
+      .then(body => {
+        if(body !== null) {
+          this.setState({ thumbs: body.vote, voteCount: body.vote_count })
+        }
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`));
+    }
   }
 
   addVote(thumb){
@@ -99,23 +101,40 @@ class ReviewTile extends Component {
       let day = date.getDate();
       return`${month}/${day}/${year}`
     }
+
+    let leaves = () => {
+      let leafTile = []
+      for (let i = 0; i < rating; i++){
+        leafTile.push(<i key= {i} className="fas fa-leaf"></i>)
+      }
+      return leafTile
+    }
+
+    let thumbsControls = ""
+    if (this.props.currentUser !== ""){
+      thumbsControls =
+      <div>
+        <span className={thumbsUpClass}>
+          <i className="fa fa-thumbs-up" id="upthumb" aria-hidden="true" onClick={this.handleThumbsUp}></i>
+        </span>
+        <span className={thumbsDownClass}>
+          <i className="fa fa-thumbs-down" id="downthumb" aria-hidden="true" onClick={this.handleThumbsDown}></i>
+        </span>
+        <p>{this.state.voteCount}</p>
+      </div>
+    }
+
     return(
       <div className="row column panel callout small-9 small-centered box-shadow">
         <div className="column small-2 ">
           <img className="profile-photo-small" src={profilePhoto} />
           <p className="user-name-container">{userName}</p>
         </div>
-        <div className="column small-10">
+        <div className="column small-10 review">
           <h3>{title}</h3>
-          <p>Stars: {rating} - {date(createdAt)}</p>
+          <p>{leaves()} - {date(createdAt)}</p>
           <p>{body}</p>
-          <span className={thumbsUpClass}>
-            <i className="fa fa-thumbs-up" id="upthumb" aria-hidden="true" onClick={this.handleThumbsUp}></i>
-          </span>
-          <span className={thumbsDownClass}>
-            <i className="fa fa-thumbs-down" id="downthumb" aria-hidden="true" onClick={this.handleThumbsDown}></i>
-          </span>
-          <p>{this.state.voteCount}</p>
+          {thumbsControls}
           <button id='deleteReviewButton' className={deleteButtonShow} onClick={deleteReview}>Delete Review</button>
         </div>
       </div>

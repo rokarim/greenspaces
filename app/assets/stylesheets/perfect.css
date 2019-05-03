@@ -1,22 +1,36 @@
 body {
-  background-color: #b4debe;
-}
-
-.top-bar {
-  background-color: #4a403d;
+  background-image: url("https://s3.amazonaws.com/greenspaces-production/default/park_background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Amatic SC', bold;
 }
 
 .panel.callout {
   background-color: #facf7d;
+  opacity: 0.8;
+  border-radius: 5px;
 }
 
-h1 {
-  font-family: 'Artifika', serif;
+.panel.callout p{
+  font-size: 2rem;
+}
+
+.index-item,
+.show-container h1 {
+  font-size: 3rem;
+}
+
+h1, h2 {
+  font-family: 'Amatic SC', bold;
   text-align: center;
+  font-size: 1.6rem;
 }
 
 p {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Amatic SC', bold;
+  font-weight: bold;
+  font-size: 1.3rem;
 }
 
 .fa {
@@ -29,6 +43,32 @@ p {
 
 .red {
   color: red;
+}
+
+label{
+  font-size: 1.3rem;
+}
+
+.log-in-container{
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.log-in-container h2{
+  text-align: center;
+}
+
+.top-bar a{
+  font-size: 1.8rem;
+}
+
+.title-container{
+  text-align: center;
+}
+
+.title-container h1 {
+  background-color: #ebf2bf;
+  display: inline-block;
 }
 
 .index-title {
