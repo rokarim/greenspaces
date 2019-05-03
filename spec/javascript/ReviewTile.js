@@ -62,10 +62,8 @@ describe('ReviewTile', () => {
   it('should increment the vote count by 1 when clicking thumbs up', (done) => {
     setTimeout(() => {
       expect(wrapper1.text()).toContain(25)
-      expect(wrapper1.find('i').at(0)).toHaveProp('id', 'upthumb')
-      expect(wrapper1.find('i').at(1)).toHaveProp('id', 'downthumb')
       expect(wrapper1.find('h3')).toHaveText("Dummy!")
-      wrapper1.find('i').at(0).simulate('click')
+      wrapper1.find('i').at(3).simulate('click')
       setTimeout(() => {
         expect(wrapper1.text()).toContain(26)
         done()
@@ -76,10 +74,8 @@ describe('ReviewTile', () => {
   it('should decrement the vote count by 1 when clicking thumbs down', (done) => {
     setTimeout(() => {
       expect(wrapper2.text()).toContain(13)
-      expect(wrapper2.find('i').at(0)).toHaveProp('id', 'upthumb')
-      expect(wrapper2.find('i').at(1)).toHaveProp('id', 'downthumb')
       expect(wrapper2.find('h3')).toHaveText("Dummy!")
-      wrapper2.find('i').at(1).simulate('click')
+      wrapper2.find('i').at(4).simulate('click')
       setTimeout(() => {
         expect(wrapper2.text()).toContain(12)
         done()

@@ -77,7 +77,6 @@ describe('GreenSpaceShowContainer', () => {
 
   it('should render react component with the information of the park', (done) => {
     setTimeout(() => {
-      console.log(wrapper.debug());
       expect(wrapper.find('h1')).toHaveText("Loraine Hill Park")
       expect(wrapper.text()).toContain("Williamsburg etsy everyday.")
       expect(wrapper.text()).toContain("2060 Commonwealth Ave.")
