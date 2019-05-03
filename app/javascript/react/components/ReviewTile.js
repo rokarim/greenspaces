@@ -113,7 +113,7 @@ class ReviewTile extends Component {
             <i className="fa fa-thumbs-up" id="upthumb" aria-hidden="true" onClick={this.handleThumbsUp}></i>
           </span>
           <span className={thumbsDownClass}>
-          <i className="fa fa-thumbs-down" id="downthumb" aria-hidden="true" onClick={this.handleThumbsDown}></i>
+            <i className="fa fa-thumbs-down" id="downthumb" aria-hidden="true" onClick={this.handleThumbsDown}></i>
           </span>
           <p>{this.state.voteCount}</p>
           <button id='deleteReviewButton' className={deleteButtonShow} onClick={deleteReview}>Delete Review</button>
