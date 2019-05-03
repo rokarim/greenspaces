@@ -76,7 +76,7 @@ class GreenSpaceIndexContainer extends Component {
     })
     return(
       <div>
-        <div className="">
+        <div className="rowrow">
           <h1 className="index-title">Green Spaces</h1>
           <div className="top-row">
             <form className= "search-bar" onSubmit={this.handleSubmit}>

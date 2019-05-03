@@ -6,6 +6,11 @@ body {
   font-family: 'Amatic SC', bold;
 }
 
+.top-bar-section ul li > a {
+  font-family: 'Amatic SC', bold;
+  font-size: 1.3rem
+}
+
 .panel.callout {
   background-color: #facf7d;
   opacity: 0.8;
@@ -66,6 +71,17 @@ label{
   float: right;
 }
 
+.rowrow{
+  text-align: center;
+}
+
+.search-bar {
+  display: inline-flex;
+  float: right;
+  top: 50px;
+  right: 0;
+}
+
 .title-container{
   text-align: center;
 }
@@ -77,14 +93,12 @@ label{
 
 .index-title {
   text-align: center;
-  float: top;
+  display: inline-flex;
+  padding-left: 16%
 }
 
-.search-bar {
-  display: inline-flex;
-  position: absolute;
-  top: 50px;
-  right: 0;
+.top-row{
+  text-align: center;
 }
 
 .search-bar input {

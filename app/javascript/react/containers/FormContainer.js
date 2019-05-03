@@ -62,7 +62,7 @@ class FormContainer extends React.Component {
           handlerFunction={this.handleChange}
         />
         <div className="button-container" >
-          <input className="button" type="submit" value="Submit" />
+          <input className="green-button" type="submit" value="Submit" />
         </div>
         <div>
           <p>{this.props.errors}</p>

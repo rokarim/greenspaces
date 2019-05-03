@@ -2,7 +2,7 @@
   color: white;
   font-size: 1.05rem;
   height: 50px;
-  width: 90px;
+  width: auto;
 }
 
 button.visible,
