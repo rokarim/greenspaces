@@ -126,11 +126,11 @@ class ReviewTile extends Component {
 
     return(
       <div className="row column panel callout small-9 small-centered box-shadow">
-        <div className="column small-2 ">
+        <div className="column small-12 medium-2 ">
           <img className="profile-photo-small" src={profilePhoto} />
           <p className="user-name-container">{userName}</p>
         </div>
-        <div className="column small-10 review">
+        <div className="column small-12 medium-10 review">
           <h3>{title}</h3>
           <p>{leaves()} - {date(createdAt)}</p>
           <p>{body}</p>
