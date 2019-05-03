@@ -2,36 +2,24 @@
 
 [![Codeship Status for CaseyCHannan/greenspaces](https://app.codeship.com/projects/c8540d30-4826-0137-8eb8-7a137bae9b7c/status?branch=master)](https://app.codeship.com/projects/337741)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
 greenspaces
 
 a site that allows users to see ratings and features of green spaces. Additionally, users can submit new green spaces and add there own reviews.
-
 
 Drew Baker
 Michael Wellman
 Paige Kiefner
 Romina Karim
+Casey Hannan
 
+Ruby 2.4.5
 
-Things you may want to cover:
+Back end in Ruby on Rails, with a react front end.
 
-* Ruby version
+In production, the database is seeded using an API provided by the City of Boston.
+It populates the database with all publicly owned green spaces greater than two acres inside Boston’s city limits.
 
-* System dependencies
+In development, users and reviews are seeded using the Faker gem.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Green Spaces is currently in production on Heroku
+http://green-spaces.herokuapp.com/
