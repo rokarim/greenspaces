@@ -4,7 +4,7 @@
 
 Greenspaces
 
-A site that allows users to see ratings and features of green spaces. Additionally, users can submit new green spaces and add their own reviews.
+A site that allows users to see ratings and features of green spaces. Users can search for and view green spaces by the neighborhood they are in, the type of space they are, or via a keyword search. Additionally, users can add their own reviews and vote on the helpfulness of other users' reviews.
 
 Drew Baker
 Michael Wellman
