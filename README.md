@@ -2,9 +2,9 @@
 
 [![Codeship Status for CaseyCHannan/greenspaces](https://app.codeship.com/projects/c8540d30-4826-0137-8eb8-7a137bae9b7c/status?branch=master)](https://app.codeship.com/projects/337741)
 
-greenspaces
+Greenspaces
 
-a site that allows users to see ratings and features of green spaces. Additionally, users can submit new green spaces and add there own reviews.
+A site that allows users to see ratings and features of green spaces. Additionally, users can submit new green spaces and add their own reviews.
 
 Drew Baker
 Michael Wellman
