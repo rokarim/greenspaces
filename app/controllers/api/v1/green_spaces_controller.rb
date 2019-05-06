@@ -2,7 +2,7 @@ class Api::V1::GreenSpacesController < ApplicationController
   serialization_scope :current_user
 
   def index
-    render json: GreenSpace.all
+    render json: GreenSpace.all, serializer: GreenSpaceIndexSerializer
   end
 
   def show
