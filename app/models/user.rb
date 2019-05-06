@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  has_many :reviews
+  has_many :reviews, :dependent => :delete_all
   has_many :green_spaces, through: :reviews
   has_many :votes
 
