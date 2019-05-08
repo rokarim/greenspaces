@@ -22,4 +22,4 @@ It populates the database with all publicly owned green spaces greater than two 
 In development, users and reviews are seeded using the Faker gem.
 
 Green Spaces is currently in production on Heroku
-http://green-spaces.herokuapp.com/
+http://greenspaces.herokuapp.com/
